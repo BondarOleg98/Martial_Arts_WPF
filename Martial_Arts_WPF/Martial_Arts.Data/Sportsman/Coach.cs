@@ -142,5 +142,9 @@ namespace Martial_Arts.Data.Sportsman
             result = clubs.Count();
             return result;
         }
+        public override string ToString()
+        {
+            return "Name :" + Name + "Surname :" + Surname;
+        }
     }
 }

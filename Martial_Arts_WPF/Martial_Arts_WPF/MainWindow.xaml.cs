@@ -22,22 +22,34 @@ namespace Martial_Arts_WPF
     {
         public MainWindow()
         {
-            InitializeComponent();
-           
+            InitializeComponent();  
+            
         }
 
-        private void Button_Continue(object sender, RoutedEventArgs e)
+        private void Button_Coach(object sender, RoutedEventArgs e)
         {
-            CategoryWindow categoryWindow = new CategoryWindow();
-            
-            categoryWindow.Owner = this;
-
-            categoryWindow.Show();
+            CoachWindow coachWindow = new CoachWindow();           
+            coachWindow.Owner = this;
+            coachWindow.Show();
         }
 
         private void Button_Exit(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();
+        }
+
+        private void Button_Student(object sender, RoutedEventArgs e)
+        {
+            StudenrWindow studenrWindow = new StudenrWindow();
+            studenrWindow.Owner = this;
+            studenrWindow.Show();
+        }
+
+        private void Button_Structure(object sender, RoutedEventArgs e)
+        {
+            StructureWindow structureWindow = new StructureWindow();
+            structureWindow.Owner = this;
+            structureWindow.Show();
         }
     }
 }

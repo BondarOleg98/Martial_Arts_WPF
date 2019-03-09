@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 namespace Martial_Arts_WPF
 {
     /// <summary>
-    /// Interaction logic for CategoryWindow.xaml
+    /// Interaction logic for StructureWindow.xaml
     /// </summary>
-    public partial class CategoryWindow : Window
+    public partial class StructureWindow : Window
     {
-        public CategoryWindow()
+        public StructureWindow()
         {
             InitializeComponent();
         }

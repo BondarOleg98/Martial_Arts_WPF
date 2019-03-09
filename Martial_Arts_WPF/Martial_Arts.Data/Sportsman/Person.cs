@@ -1,4 +1,6 @@
 ﻿using System;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace Martial_Arts.Data
 {
@@ -35,5 +37,7 @@ namespace Martial_Arts.Data
             Age = age;
             Country = country;
         }
+
+      
     }
 }
