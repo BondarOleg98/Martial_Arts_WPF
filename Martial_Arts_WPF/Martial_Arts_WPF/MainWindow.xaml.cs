@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
+using Martial_Arts.Data;
 namespace Martial_Arts_WPF
 {
     /// <summary>
@@ -23,6 +23,21 @@ namespace Martial_Arts_WPF
         public MainWindow()
         {
             InitializeComponent();
+           
+        }
+
+        private void Button_Continue(object sender, RoutedEventArgs e)
+        {
+            CategoryWindow categoryWindow = new CategoryWindow();
+            
+            categoryWindow.Owner = this;
+
+            categoryWindow.Show();
+        }
+
+        private void Button_Exit(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
         }
     }
 }
