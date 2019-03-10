@@ -37,15 +37,15 @@ namespace Martial_Arts_WPF.AdditionalWindows
 
         private void Button_Edit_Click(object sender, RoutedEventArgs e)
         {
-            int coach = listCoach.SelectedIndex;
-            
-            if (coach ==-1 )
+            int coach_Id = listCoach.SelectedIndex;
+            var coach = (Coach)listCoach.SelectedItem;
+            if (coach_Id ==-1 )
             {
                 MessageBox.Show("Choose a coach");
             }
             else
             {
-                CoachDialogWindow coachDialogWindow = new CoachDialogWindow(coach);
+                CoachDialogWindow coachDialogWindow = new CoachDialogWindow(coach_Id, coach);
                 coachDialogWindow.bt_Add.IsEnabled = false;
                 this.Close();
                 coachDialogWindow.Show();
@@ -57,6 +57,13 @@ namespace Martial_Arts_WPF.AdditionalWindows
             MainWindow mainWindow = new MainWindow();
             this.Close();
             mainWindow.Show();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Coach coach = new Coach();
+            listBox.ItemsSource = coach.Students;
+            listBox.Items.Refresh();
         }
     }
 }

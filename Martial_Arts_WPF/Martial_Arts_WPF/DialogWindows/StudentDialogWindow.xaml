@@ -18,6 +18,7 @@
         <Button x:Name="bt_Add" Content="Add" HorizontalAlignment="Left" Margin="343,297,0,0" VerticalAlignment="Top" Width="75" Click="Button_Add_Click" RenderTransformOrigin="0.547,-1.5"/>
         <Button x:Name="bt_Edit" Content="Edit" HorizontalAlignment="Left" Margin="259,297,0,0" VerticalAlignment="Top" Width="75" Click="Button_Edit_Click"/>
         <Button Content="Cancel" HorizontalAlignment="Left" Margin="178,297,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
+        <StackPanel x:Name="stackpanel" HorizontalAlignment="Left" Height="100" Margin="286,41,0,0" VerticalAlignment="Top" Width="100"/>
 
 
     </Grid>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows;
+using System.Windows.Controls;
 using Martial_Arts.Data.Sportsman;
 using Martial_Arts_WPF.AdditionalWindows;
 namespace Martial_Arts_WPF.DialogWindows
@@ -12,6 +13,12 @@ namespace Martial_Arts_WPF.DialogWindows
         public StudentDialogWindow()
         {
             InitializeComponent();
+
+            foreach (var item in Coach.coaches)
+            {
+                RadioButton radiobutton = new RadioButton { Content = item.Name };
+                stackpanel.Children.Add(radiobutton);
+            }
         }
 
         private void Button_Add_Click(object sender, RoutedEventArgs e)
@@ -24,7 +31,7 @@ namespace Martial_Arts_WPF.DialogWindows
                 {
                     throw new Exception("Error 404: ");
                 }
-                Student.students.Add(student);
+                Student._students.Add(student);
                 StudentWindow studentWindow = new StudentWindow();
                 this.Close();
                 studentWindow.Show();

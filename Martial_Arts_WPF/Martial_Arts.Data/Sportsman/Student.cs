@@ -9,7 +9,7 @@ namespace Martial_Arts.Data.Sportsman
     public class Student : Person
     {
         private int yearsTraining;
-        public static List<Student> students = new List<Student>();
+        
         public static List<Student> _students = new List<Student>();
 
         public Student(int yearsTraining, string sportsmanStatus, string likeCompetition,
@@ -67,6 +67,10 @@ namespace Martial_Arts.Data.Sportsman
                         result.Add(cia);
                 return result;
             }
+        }
+        public override string ToString()
+        {
+            return Name +" "+ Surname;
         }
     }
 }
