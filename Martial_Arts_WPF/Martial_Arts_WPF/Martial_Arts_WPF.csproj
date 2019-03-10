@@ -55,13 +55,28 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="StructureWindow.xaml.cs">
+    <Compile Include="DialogWindows\CoachDialogWindow.xaml.cs">
+      <DependentUpon>CoachDialogWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AdditionalWindows\StructureWindow.xaml.cs">
       <DependentUpon>StructureWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="StudentWindow.xaml.cs">
+    <Compile Include="AdditionalWindows\StudentWindow.xaml.cs">
       <DependentUpon>StudentWindow.xaml</DependentUpon>
     </Compile>
-    <Page Include="CoachWindow.xaml">
+    <Page Include="AdditionalWindows\CoachWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DialogWindows\CoachDialogWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DialogWindows\StructureDialogWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DialogWindows\StudentDialogWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -73,18 +88,24 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="CoachWindow.xaml.cs">
+    <Compile Include="AdditionalWindows\CoachWindow.xaml.cs">
       <DependentUpon>CoachWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DialogWindows\StructureDialogWindow.xaml.cs">
+      <DependentUpon>StructureDialogWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DialogWindows\StudentDialogWindow.xaml.cs">
+      <DependentUpon>StudentDialogWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="StructureWindow.xaml">
+    <Page Include="AdditionalWindows\StructureWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="StudentWindow.xaml">
+    <Page Include="AdditionalWindows\StudentWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -124,5 +145,6 @@
       <Name>Martial_Arts.Data</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

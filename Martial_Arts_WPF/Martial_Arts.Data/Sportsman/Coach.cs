@@ -57,8 +57,8 @@ namespace Martial_Arts.Data.Sportsman
             YearStartCareer = yearStartCareer;
 
         }
-        public Coach(string name, string surname, string belt, string sportTitle, int age, string country):
-            base(name, surname, belt, sportTitle, age, country)
+        public Coach(string name, string surname, string belt, int age):
+            base(name, surname, belt,  age )
         {
 
         }

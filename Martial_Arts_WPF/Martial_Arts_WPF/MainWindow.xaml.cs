@@ -1,18 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using Martial_Arts.Data;
+﻿using System.Windows;
+using Martial_Arts_WPF.AdditionalWindows;
 namespace Martial_Arts_WPF
 {
     /// <summary>
@@ -28,9 +15,9 @@ namespace Martial_Arts_WPF
 
         private void Button_Coach(object sender, RoutedEventArgs e)
         {
-            CoachWindow coachWindow = new CoachWindow();           
-            coachWindow.Owner = this;
-            coachWindow.Show();
+            CoachWindow coachWindow = new CoachWindow();
+            this.Close();
+            coachWindow.ShowDialog();
         }
 
         private void Button_Exit(object sender, RoutedEventArgs e)
@@ -40,16 +27,14 @@ namespace Martial_Arts_WPF
 
         private void Button_Student(object sender, RoutedEventArgs e)
         {
-            StudenrWindow studenrWindow = new StudenrWindow();
-            studenrWindow.Owner = this;
-            studenrWindow.Show();
+            StudentWindow studenrWindow = new StudentWindow();
+            studenrWindow.ShowDialog();
         }
 
         private void Button_Structure(object sender, RoutedEventArgs e)
         {
             StructureWindow structureWindow = new StructureWindow();
-            structureWindow.Owner = this;
-            structureWindow.Show();
+            structureWindow.ShowDialog();
         }
     }
 }

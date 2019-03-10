@@ -21,6 +21,12 @@ namespace Martial_Arts.Data.Sportsman
             LikeCompetition = likeCompetition;
         }
 
+        public Student(string name, string surname, string belt, int age) :
+            base(name, surname, belt, age)
+        {
+
+        }
+
         public string LikeCompetition { get; set; }
         public string SportsmanStatus { get; set; }
         public int YearsTraining
