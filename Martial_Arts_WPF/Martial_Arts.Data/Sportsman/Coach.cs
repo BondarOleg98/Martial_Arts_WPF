@@ -9,6 +9,7 @@ namespace Martial_Arts.Data.Sportsman
     public class Coach : Person
     {
         public static List<Coach> coaches = new List<Coach>();
+        public static List<Student> students = new List<Student>();
 
         private int countStudents;
         private int yearStartCareer;
@@ -17,6 +18,11 @@ namespace Martial_Arts.Data.Sportsman
         public Coach(string name)
         {
             Name = name;
+        }
+
+        public Coach()
+        {
+
         }
         public int YearStartCareer
         {
@@ -68,7 +74,7 @@ namespace Martial_Arts.Data.Sportsman
             get
             {
                 List<Student> result = new List<Student>();
-                foreach (Student st in Student.students)
+                foreach (Student st in Student._students)
                     if (st.Coach == this)
                         result.Add(st);
                 return result;
@@ -79,7 +85,7 @@ namespace Martial_Arts.Data.Sportsman
         {
             get
             {
-                foreach (Student student in Student.students)
+                foreach (Student student in Student._students)
                     if (student.Id == _studentId)
                         return student;
                 return null;
@@ -149,7 +155,7 @@ namespace Martial_Arts.Data.Sportsman
         }
         public override string ToString()
         {
-            return "Name :" + Name + "Surname :" + Surname;
+            return Name+" " +Surname;
         }
     }
 }

@@ -11,7 +11,7 @@ namespace Martial_Arts_WPF.AdditionalWindows
         public StudentWindow()
         {
             InitializeComponent();
-            listStudent.ItemsSource = Student.students;
+            listStudent.ItemsSource = Student._students;
             listStudent.Items.Refresh();
         }
 

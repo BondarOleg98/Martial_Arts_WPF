@@ -12,21 +12,31 @@ namespace Martial_Arts_WPF.DialogWindows
     {
         private int Id_Coach { get; set; }
 
-        public CoachDialogWindow(int coach)
+        public CoachDialogWindow(int coach_Id, Coach coach)
         {
             InitializeComponent();
+            //foreach (var item in Student.students)
+            //{
+            //    CheckBox checkBox = new CheckBox { Content = item.Name };
+            //    stackpanel.Children.Add(checkBox);
+            //}
+            textName.Text = coach.Name;
+            textSurname.Text = coach.Surname;
+            textAge.Text = coach.Age.ToString();
+            textBelt.Text = coach.Belt.ToString();
 
-           
-            Id_Coach = coach;
+            Id_Coach = coach_Id;
         }
         public CoachDialogWindow()
         {
             InitializeComponent();
-            foreach (var item in Student.students)
+            foreach (var item in Student._students)
             {
-                CheckBox checkBox = new CheckBox { Content = item.Name };
-                stackpanel.Children.Add(checkBox);
+                //    CheckBox checkBox = new CheckBox { Content = item.Name };
+                //    stackpanel.Children.Add(checkBox);
+                listBox.Items.Add(item);
             }
+           
         }
 
         private void Button_Add_Click(object sender, RoutedEventArgs e)
@@ -40,6 +50,13 @@ namespace Martial_Arts_WPF.DialogWindows
                     throw new Exception("Error 404: ");
                 }
                 Coach.coaches.Add(coach);
+                
+              
+                Student stud = (Student)listBox.SelectedItem;
+                coach.Students.Add(stud);
+                
+
+               
                 CoachWindow coachWindow = new CoachWindow();
                 this.Close();
                 coachWindow.Show();
