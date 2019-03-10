@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace Martial_Arts.Data.Relationship
 {
-    class ArtCoach
+    public class ArtCoach
     {
         public static List<ArtCoach> ArtCoaches = new List<ArtCoach>();
 

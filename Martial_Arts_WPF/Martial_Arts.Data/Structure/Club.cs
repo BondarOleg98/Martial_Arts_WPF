@@ -3,7 +3,7 @@ using Martial_Arts.Data.Sportsman;
 
 namespace Martial_Arts.Data.Structure
 {
-    class Club : Base
+    public class Club : Base
     {
         public static List<Club> Clubs = new List<Club>();
         public string Name { get; set; }

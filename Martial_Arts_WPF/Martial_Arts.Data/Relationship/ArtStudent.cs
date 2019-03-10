@@ -5,7 +5,7 @@ using Martial_Arts.Data.Structure;
 
 namespace Martial_Arts.Data.Relationship
 {
-    class ArtStudent
+    public class ArtStudent
     {
         public static List<ArtStudent> ArtStudents = new List<ArtStudent>();
 

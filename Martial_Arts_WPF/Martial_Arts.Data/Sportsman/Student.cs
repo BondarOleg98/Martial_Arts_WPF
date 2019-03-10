@@ -6,7 +6,7 @@ using Martial_Arts.Data.Relationship;
 
 namespace Martial_Arts.Data.Sportsman
 {
-    class Student : Person
+    public class Student : Person
     {
         private int yearsTraining;
         public static List<Student> students = new List<Student>();

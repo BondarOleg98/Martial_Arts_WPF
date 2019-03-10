@@ -7,10 +7,20 @@
         mc:Ignorable="d"
         Title="CoachWindow" Height="450" Width="800">
     <Grid>
-        <ListBox HorizontalAlignment="Left" Height="100" Margin="60,49,0,0" VerticalAlignment="Top" Width="100" SelectionChanged="ListBox_SelectionChanged"/>
         <Button Content="Button" HorizontalAlignment="Left" Margin="369,175,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="358,81,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" TextChanged="TextBox_TextChanged"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="537,81,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" TextChanged="TextBox_TextChanged_1"/>
+        <TextBox x:Name="textName" HorizontalAlignment="Left" Height="23" Margin="358,81,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" />
+        <ListView x:Name="listCoach" HorizontalAlignment="Left" Height="100" Margin="94,81,0,0" VerticalAlignment="Top" Width="215">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Name}">Name</GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Surname}" Width="100">Surname</GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Age}">Age</GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Button Content="Button" HorizontalAlignment="Left" Margin="503,181,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click_1"/>
+        <Button Content="Button" HorizontalAlignment="Left" Margin="642,195,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click_2"/>
+
 
     </Grid>
 </Window>
