@@ -4,7 +4,7 @@ using Martial_Arts.Data.Structure;
 
 namespace Martial_Arts.Data.Structure
 {
-    class Federation : Base
+    public class Federation : Base
     {
         public static List<Federation> Federations = new List<Federation>();
         private int countCoaches;

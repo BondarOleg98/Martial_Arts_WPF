@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace Martial_Arts.Data.Sportsman
 {
-    class Coach : Person
+    public class Coach : Person
     {
         public static List<Coach> coaches = new List<Coach>();
 
@@ -55,6 +55,11 @@ namespace Martial_Arts.Data.Sportsman
             CountStudents = countStudents;
             JudgeCategory = judgeCategory;
             YearStartCareer = yearStartCareer;
+
+        }
+        public Coach(string name, string surname, string belt, string sportTitle, int age, string country):
+            base(name, surname, belt, sportTitle, age, country)
+        {
 
         }
 
@@ -141,6 +146,10 @@ namespace Martial_Arts.Data.Sportsman
             int result = 0;
             result = clubs.Count();
             return result;
+        }
+        public override string ToString()
+        {
+            return "Name :" + Name + "Surname :" + Surname;
         }
     }
 }

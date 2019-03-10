@@ -5,13 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Martial_Arts_WPF"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="MainWindow" Height="338" Width="519">
+    <Grid Margin="0,0,2,6" Background="AliceBlue">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition Width="43*"/>
         </Grid.ColumnDefinitions>
-        <TextBlock HorizontalAlignment="Left" Margin="145,146,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Grid.Column="1" Height="54" Width="489" RenderTransformOrigin="0.5,0.5">
+        <TextBlock HorizontalAlignment="Left" Margin="19,29,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Grid.Column="1" Height="54" Width="449" RenderTransformOrigin="0.5,0.5">
             <TextBlock.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -19,12 +19,12 @@
                     <RotateTransform Angle="-359.778"/>
                     <TranslateTransform/>
                 </TransformGroup>
-            </TextBlock.RenderTransform>
-            <Run FontSize="30" Text="Hello, please enter continue or exit"></Run>
-        </TextBlock>
-        <Button Content="Continue" Grid.Column="1" HorizontalAlignment="Left" Margin="672,364,0,0" VerticalAlignment="Top" Width="76" Click="Button_Continue"/>
-        <Button Content="Exit" Grid.Column="1" HorizontalAlignment="Left" Margin="576,364,0,0" VerticalAlignment="Top" Width="72" Height="20" Click="Button_Exit"/>
-        
+            </TextBlock.RenderTransform><Run FontSize="30" Text="Welcome, please enter a category"/></TextBlock>
+        <Button Content="Coach" Grid.Column="1" HorizontalAlignment="Left" Margin="71,138,0,0" VerticalAlignment="Top" Width="76" Background ="Beige"  Click="Button_Coach"/>
+        <Button Content="Exit" Grid.Column="1" HorizontalAlignment="Left" Margin="415,271,0,0" VerticalAlignment="Top" Width="72" Height="20" Background="FloralWhite"  Click="Button_Exit" RenderTransformOrigin="-0.208,-0.8"/>
+        <Button Content="Student" Grid.Column="1" HorizontalAlignment="Left" Margin="203,139,0,0" VerticalAlignment="Top" Width="75" Background="Bisque" Click="Button_Student"/>
+        <Button Content="Structure" Grid.Column="1" HorizontalAlignment="Left" Margin="336,139,0,0" VerticalAlignment="Top" Width="75" Background="Gold"  Click="Button_Structure" RenderTransformOrigin="0.147,-0.2"/>
+
 
     </Grid>
 
