@@ -38,6 +38,12 @@ namespace Martial_Arts.Data
             Country = country;
         }
 
-      
+        public Person(string name, string surname, string belt, int age)
+        {
+            Name = name;
+            Surname = surname;
+            Belt = belt;
+            this.age = age;
+        }
     }
 }

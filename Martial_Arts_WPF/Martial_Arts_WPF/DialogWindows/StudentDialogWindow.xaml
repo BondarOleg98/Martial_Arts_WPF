@@ -1,0 +1,24 @@
+﻿<Window x:Class="Martial_Arts_WPF.DialogWindows.StudentDialogWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Martial_Arts_WPF.DialogWindows"
+        mc:Ignorable="d"
+        Title="StudentDialogWindow" Height="450" Width="800">
+    <Grid Margin="0,0,2,4">
+        <TextBox x:Name="textName" HorizontalAlignment="Left" Height="23" Margin="49,41,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="80" RenderTransformOrigin="0.5,-0.391" />
+        <Label Content="  Name" HorizontalAlignment="Left" Margin="61,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.127,-0.223" Width="57"/>
+        <Label Content="Surname" HorizontalAlignment="Left" Margin="61,69,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.281,-0.308"/>
+        <TextBox x:Name="textSurname" HorizontalAlignment="Left" Height="23" Margin="49,100,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="80"/>
+        <TextBox x:Name="textAge" HorizontalAlignment="Left" Height="23" Margin="49,159,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="80"/>
+        <TextBox x:Name="textBelt" HorizontalAlignment="Left" Height="23" Margin="49,213,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="80"/>
+        <Label Content="Age" HorizontalAlignment="Left" Margin="72,128,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.581,-0.115"/>
+        <Label Content="Belt" HorizontalAlignment="Left" Margin="72,187,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="bt_Add" Content="Add" HorizontalAlignment="Left" Margin="343,297,0,0" VerticalAlignment="Top" Width="75" Click="Button_Add_Click" RenderTransformOrigin="0.547,-1.5"/>
+        <Button x:Name="bt_Edit" Content="Edit" HorizontalAlignment="Left" Margin="259,297,0,0" VerticalAlignment="Top" Width="75" Click="Button_Edit_Click"/>
+        <Button Content="Cancel" HorizontalAlignment="Left" Margin="178,297,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
+
+
+    </Grid>
+</Window>

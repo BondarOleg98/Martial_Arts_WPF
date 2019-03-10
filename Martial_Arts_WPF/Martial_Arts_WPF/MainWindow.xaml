@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Martial_Arts_WPF"
         mc:Ignorable="d"
         Title="MainWindow" Height="338" Width="519">
-    <Grid Margin="0,0,2,6" Background="AliceBlue">
+    <Grid Margin="0,0,2,6">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition Width="43*"/>

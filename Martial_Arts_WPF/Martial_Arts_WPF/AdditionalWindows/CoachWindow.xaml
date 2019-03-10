@@ -1,0 +1,32 @@
+﻿<Window x:Class="Martial_Arts_WPF.AdditionalWindows.CoachWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Martial_Arts_WPF.AdditionalWindows"
+        mc:Ignorable="d"
+        Title="CoachWindow" Height="313.5" Width="396.5">
+    <Grid Margin="0,0,2,1">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="11*"/>
+            <ColumnDefinition Width="376*"/>
+        </Grid.ColumnDefinitions>
+        <Button Content="Add" HorizontalAlignment="Left" Margin="273,53,0,0" VerticalAlignment="Top" Width="76" Click="Button_Add_Click" Height="20" Grid.Column="1"/>
+        <Button Content="Remove" HorizontalAlignment="Left" Margin="273,113,0,0" VerticalAlignment="Top" Width="76" Click="Button_Remove_Click" Height="20" Grid.Column="1"/>
+        <Button Content="Edit" HorizontalAlignment="Left" Margin="273,178,0,0" VerticalAlignment="Top" Width="76" Click="Button_Edit_Click" Height="20" Grid.Column="1"/>
+        <ListView x:Name="listCoach" HorizontalAlignment="Left" Height="250" Margin="0,10,0,0" VerticalAlignment="Top" Width="254" Grid.Column="1">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn DisplayMemberBinding="{Binding Name}" Width="60" Header="Name"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Surname}" Width="100" Header="Surname"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Age}" Width="40" Header="Age"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Belt}" Width="50" Header="Belt"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Button Content="Cancel" Grid.Column="1" HorizontalAlignment="Left" Margin="323,251,0,0" VerticalAlignment="Top" Width="42" Height="21" Click="Button_Cancel_Click"/>
+
+
+
+    </Grid>
+</Window>

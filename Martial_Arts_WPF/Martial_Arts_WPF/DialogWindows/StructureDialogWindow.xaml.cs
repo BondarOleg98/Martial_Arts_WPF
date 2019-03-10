@@ -12,14 +12,14 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace Martial_Arts_WPF
+namespace Martial_Arts_WPF.DialogWindows
 {
     /// <summary>
-    /// Interaction logic for StructureWindow.xaml
+    /// Interaction logic for StructureDialogWindow.xaml
     /// </summary>
-    public partial class StructureWindow : Window
+    public partial class StructureDialogWindow : Window
     {
-        public StructureWindow()
+        public StructureDialogWindow()
         {
             InitializeComponent();
         }
