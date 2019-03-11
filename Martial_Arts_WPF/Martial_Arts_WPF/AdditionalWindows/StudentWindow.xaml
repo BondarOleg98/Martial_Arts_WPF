@@ -26,7 +26,7 @@
         </ListView>
         <Button Content="Cancel" Grid.Column="1" HorizontalAlignment="Left" Margin="443,264,0,0" VerticalAlignment="Top" Width="47" Height="20" Click="Button_Cancel_Click"/>
         <Label Content="Student" Grid.Column="1" HorizontalAlignment="Left" Margin="100,5,0,0" VerticalAlignment="Top" RenderTransformOrigin="-2.974,0.115"/>
-        <ListView Grid.Column="1" HorizontalAlignment="Left" Height="100" Margin="276,34,0,0" VerticalAlignment="Top" Width="106">
+        <ListView x:Name="listMartialArts" Grid.Column="1" HorizontalAlignment="Left" Height="100" Margin="276,34,0,0" VerticalAlignment="Top" Width="106">
             <ListView.View>
                 <GridView>
                     <GridViewColumn DisplayMemberBinding="{Binding Name}" Width="100" Header="Name"/>
@@ -35,6 +35,7 @@
             </ListView.View>
         </ListView>
         <Label Content="Martial arts" Grid.Column="1" HorizontalAlignment="Left" Margin="293,5,0,0" VerticalAlignment="Top"/>
+        <Button Content="Show arts" Grid.Column="1" HorizontalAlignment="Left" Margin="276,155,0,0" VerticalAlignment="Top" Width="106" RenderTransformOrigin="0.273,-0.45" Click="Button_Show_Click"/>
 
 
 

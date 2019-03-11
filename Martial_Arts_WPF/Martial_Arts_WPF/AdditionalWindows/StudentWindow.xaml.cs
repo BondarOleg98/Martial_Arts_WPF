@@ -1,6 +1,8 @@
 ﻿using System.Windows;
 using Martial_Arts_WPF.DialogWindows;
 using Martial_Arts.Data.Sportsman;
+using Martial_Arts.Data.Structure;
+using Martial_Arts.Data.Relationship;
 namespace Martial_Arts_WPF.AdditionalWindows
 {
     /// <summary>
@@ -41,15 +43,11 @@ namespace Martial_Arts_WPF.AdditionalWindows
                 MessageBox.Show("Choose a student");
             }
             else
-            {
-               
-                StudentDialogWindow studentDialogWindow = new StudentDialogWindow(student_Id, student);
-               
-                studentDialogWindow.bt_Add.IsEnabled = false;
-                
+            {      
+                StudentDialogWindow studentDialogWindow = new StudentDialogWindow(student_Id, student);            
+                studentDialogWindow.bt_Add.IsEnabled = false;                
                 studentDialogWindow.Show();
                 this.Close();
-
             }
         }
 
@@ -60,6 +58,21 @@ namespace Martial_Arts_WPF.AdditionalWindows
           
             mainWindow.Show();
             this.Close();
+        }
+
+        private void Button_Show_Click(object sender, RoutedEventArgs e)
+        {
+            MartialArt._martialArts.Clear();
+            listMartialArts.ItemsSource = MartialArt._martialArts;
+            listMartialArts.Items.Refresh();
+            var Students = (Student)listStudent.SelectedItem;
+            foreach (MartialArt item in Students.MartialArts)
+            {
+                 MartialArt._martialArts.Add(item);
+                 listMartialArts.ItemsSource = MartialArt._martialArts;
+                 listMartialArts.Items.Refresh();
+
+            }
         }
     }
 }

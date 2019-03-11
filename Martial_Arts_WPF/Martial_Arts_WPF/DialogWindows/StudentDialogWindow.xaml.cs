@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Windows;
-using System.Windows.Controls;
+using Martial_Arts.Data.Relationship;
 using Martial_Arts.Data.Sportsman;
 using Martial_Arts_WPF.AdditionalWindows;
+using Martial_Arts.Data.Structure;
+using System.Collections.Generic;
+
 namespace Martial_Arts_WPF.DialogWindows
 {
     /// <summary>
@@ -16,6 +19,7 @@ namespace Martial_Arts_WPF.DialogWindows
         {
             InitializeComponent();
             comboBoxCoaches.ItemsSource = Coach.coaches;
+            listMartialArts.ItemsSource = MartialArt.martialArts;
         }
         public StudentDialogWindow(int student_Id, Student student)
         {
@@ -35,12 +39,18 @@ namespace Martial_Arts_WPF.DialogWindows
             {
                 
                 Student student = new Student();
+                ArtStudent artStudent = new ArtStudent();
                 student.Name = textName.Text;
                 student.Surname = textSurname.Text;
                 student.Belt = textBelt.Text;
 
                 student.Age = Convert.ToInt16(textAge.Text);
                 student.Coach = (Coach)comboBoxCoaches.SelectedItem;
+
+                artStudent.MartialArt = (MartialArt)listMartialArts.SelectedItem;
+                artStudent.Student = student;
+                
+                ArtStudent.ArtStudents.Add(artStudent);
 
                 if(comboBoxCoaches.SelectedItem == null)
                 {

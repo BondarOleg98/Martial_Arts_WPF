@@ -40,7 +40,7 @@ namespace Martial_Arts.Data.Relationship
         {
             get
             {
-                foreach (MartialArt materialArt in MartialArt.materialArts)
+                foreach (MartialArt materialArt in MartialArt.martialArts)
                     if (materialArt.Id == _artID)
                         return materialArt;
                 return null;

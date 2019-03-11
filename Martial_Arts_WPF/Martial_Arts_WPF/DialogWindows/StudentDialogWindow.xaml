@@ -5,20 +5,23 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Martial_Arts_WPF.DialogWindows"
         mc:Ignorable="d"
-        Title="StudentDialogWindow" Height="256" Width="374">
+        Title="StudentDialogWindow" Height="289" Width="389">
     <Grid Margin="0,0,2,4">
-        <TextBox x:Name="textName" HorizontalAlignment="Left" Height="23" Margin="49,41,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="80" RenderTransformOrigin="0.5,-0.391" />
-        <Label Content="  Name" HorizontalAlignment="Left" Margin="61,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.127,-0.223" Width="57"/>
-        <Label Content="Surname" HorizontalAlignment="Left" Margin="164,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.281,-0.308"/>
-        <TextBox x:Name="textSurname" HorizontalAlignment="Left" Height="23" Margin="153,41,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="80"/>
-        <TextBox x:Name="textAge" HorizontalAlignment="Left" Height="23" Margin="49,100,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="80"/>
-        <TextBox x:Name="textBelt" HorizontalAlignment="Left" Height="23" Margin="153,100,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="80"/>
-        <Label Content="Age" HorizontalAlignment="Left" Margin="72,70,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.581,-0.115"/>
-        <Label Content="Belt" HorizontalAlignment="Left" Margin="178,70,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="bt_Add" Content="Add" HorizontalAlignment="Left" Margin="274,41,0,0" VerticalAlignment="Top" Width="75" Click="Button_Add_Click" RenderTransformOrigin="0.547,-1.5"/>
-        <Button x:Name="bt_Edit" Content="Edit" HorizontalAlignment="Left" Margin="274,75,0,0" VerticalAlignment="Top" Width="75" Click="Button_Edit_Click"/>
-        <Button x:Name="bt_Cancel" Content="Cancel" HorizontalAlignment="Left" Margin="274,108,0,0" VerticalAlignment="Top" Width="75" Click="Button_Cancel_Click"/>
-        <ComboBox x:Name="comboBoxCoaches" HorizontalAlignment="Left" Margin="89,152,0,0" VerticalAlignment="Top" Width="103"/>
+        <TextBox x:Name="textName" HorizontalAlignment="Left" Height="23" Margin="49,41,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="99" RenderTransformOrigin="0.5,-0.391" />
+        <Label Content="  Name" HorizontalAlignment="Left" Margin="70,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.127,-0.223" Width="57"/>
+        <Label Content="Surname" HorizontalAlignment="Left" Margin="186,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.281,-0.308"/>
+        <TextBox x:Name="textSurname" HorizontalAlignment="Left" Height="23" Margin="164,41,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="100"/>
+        <TextBox x:Name="textAge" HorizontalAlignment="Left" Height="23" Margin="49,100,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="99"/>
+        <TextBox x:Name="textBelt" HorizontalAlignment="Left" Height="23" Margin="164,100,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="100"/>
+        <Label Content="Age" HorizontalAlignment="Left" Margin="83,70,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.581,-0.115"/>
+        <Label Content="Belt" HorizontalAlignment="Left" Margin="199,70,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="bt_Add" Content="Add" HorizontalAlignment="Left" Margin="289,41,0,0" VerticalAlignment="Top" Width="75" Click="Button_Add_Click" RenderTransformOrigin="0.547,-1.5"/>
+        <Button x:Name="bt_Edit" Content="Edit" HorizontalAlignment="Left" Margin="289,75,0,0" VerticalAlignment="Top" Width="75" Click="Button_Edit_Click"/>
+        <Button x:Name="bt_Cancel" Content="Cancel" HorizontalAlignment="Left" Margin="289,108,0,0" VerticalAlignment="Top" Width="75" Click="Button_Cancel_Click"/>
+        <ComboBox x:Name="comboBoxCoaches" HorizontalAlignment="Left" Margin="49,156,0,0" VerticalAlignment="Top" Width="103"/>
+        <Label Content="Coach" HorizontalAlignment="Left" Margin="78,130,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.921,-0.192"/>
+        <ListBox x:Name="listMartialArts" HorizontalAlignment="Left" Height="65" Margin="164,156,0,0" VerticalAlignment="Top" Width="100" SelectionMode="Multiple"/>
+        <Label Content="Martial arts" HorizontalAlignment="Left" Margin="179,130,0,0" VerticalAlignment="Top"/>
 
 
     </Grid>

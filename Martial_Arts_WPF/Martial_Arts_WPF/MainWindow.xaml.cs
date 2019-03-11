@@ -34,9 +34,10 @@ namespace Martial_Arts_WPF
 
         private void Button_Structure(object sender, RoutedEventArgs e)
         {
-            StructureWindow structureWindow = new StructureWindow();
+            MartialArtsWindow martialArtsWindow = new MartialArtsWindow();
+           
+            martialArtsWindow.Show();
             this.Close();
-            structureWindow.Show();
         }
     }
 }

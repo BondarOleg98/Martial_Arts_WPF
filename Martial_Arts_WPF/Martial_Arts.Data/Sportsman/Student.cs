@@ -10,6 +10,7 @@ namespace Martial_Arts.Data.Sportsman
         private int yearsTraining;
         public Guid _coachId;
         public static List<Student> _students = new List<Student>();
+        public static List<Student> Students = new List<Student>();
 
         public Student(int yearsTraining, string sportsmanStatus, string likeCompetition,
             string name, string surname, string belt, string sportTitle, int age, string country) :
@@ -62,14 +63,14 @@ namespace Martial_Arts.Data.Sportsman
             }
         }
 
-        public List<MartialArt> MaterialArts
+        public List<MartialArt> MartialArts
         {
             get
             {
                 List<MartialArt> result = new List<MartialArt>();
                 foreach (ArtStudent sia in ArtStudent.ArtStudents)
                     if (sia.Student == this)
-                        result.Add(sia.MaterialArt);
+                        result.Add(sia.MartialArt);
                 return result;
             }
 
