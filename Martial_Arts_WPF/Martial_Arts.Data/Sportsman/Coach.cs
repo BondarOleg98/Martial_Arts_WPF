@@ -155,7 +155,7 @@ namespace Martial_Arts.Data.Sportsman
         }
         public override string ToString()
         {
-            return Name+" " +Surname;
+            return Name + " " + Surname;
         }
     }
 }

@@ -2,7 +2,7 @@
 using System.Windows;
 using Martial_Arts.Data.Sportsman;
 using Martial_Arts_WPF.DialogWindows;
-
+using Martial_Arts.Data;
 namespace Martial_Arts_WPF.AdditionalWindows
 {
     /// <summary>
@@ -30,9 +30,12 @@ namespace Martial_Arts_WPF.AdditionalWindows
         private void Button_Remove_Click(object sender, RoutedEventArgs e)
         {
             var coach = (Coach)listCoach.SelectedItem;
-            Coach.coaches.Remove(coach);
+            Coach.coaches.Remove(coach);        
             listCoach.Items.Refresh();
-            
+            Coach.students.Clear();
+            listStudents.ItemsSource = Coach.students;
+            listStudents.Items.Refresh();
+
         }
 
         private void Button_Edit_Click(object sender, RoutedEventArgs e)
@@ -54,16 +57,29 @@ namespace Martial_Arts_WPF.AdditionalWindows
 
         private void Button_Cancel_Click(object sender, RoutedEventArgs e)
         {
+          
             MainWindow mainWindow = new MainWindow();
             this.Close();
             mainWindow.Show();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Button_Show_Click(object sender, RoutedEventArgs e)
         {
-            Coach coach = new Coach();
-            listBox.ItemsSource = coach.Students;
-            listBox.Items.Refresh();
+            Coach.students.Clear();
+            listStudents.ItemsSource = Coach.students;
+            listStudents.Items.Refresh();
+            var Coaches = (Coach)listCoach.SelectedItem;
+            foreach (var item in Student._students)
+            {
+                if(item._coachId == Coaches.Id)
+                {
+
+                    Coach.students.Add(item);
+                    listStudents.ItemsSource = Coach.students;
+                    listStudents.Items.Refresh();
+                }
+                   
+            }
         }
     }
 }
