@@ -5,16 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Martial_Arts_WPF.AdditionalWindows"
         mc:Ignorable="d"
-        Title="StudenrWindow" Height="349.298" Width="424.894">
+        Title="StudenrWindow" Height="326.298" Width="526.894">
     <Grid Margin="0,0,2,-3">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="11*"/>
             <ColumnDefinition Width="384*"/>
         </Grid.ColumnDefinitions>
-        <Button Content="Add" HorizontalAlignment="Left" Margin="273,53,0,0" VerticalAlignment="Top" Width="76" Click="Button_Add_Click" Height="20" Grid.Column="1"/>
-        <Button Content="Remove" HorizontalAlignment="Left" Margin="273,113,0,0" VerticalAlignment="Top" Width="76" Click="Button_Remove_Click" Height="20" Grid.Column="1"/>
-        <Button Content="Edit" HorizontalAlignment="Left" Margin="273,178,0,0" VerticalAlignment="Top" Width="76" Click="Button_Edit_Click" Height="20" Grid.Column="1"/>
-        <ListView x:Name="listStudent" HorizontalAlignment="Left" Height="250" Margin="0,10,0,0" VerticalAlignment="Top" Width="254" Grid.Column="1">
+        <Button Content="Add" HorizontalAlignment="Left" Margin="405,34,0,0" VerticalAlignment="Top" Width="76" Click="Button_Add_Click" Height="20" Grid.Column="1"/>
+        <Button Content="Remove" HorizontalAlignment="Left" Margin="405,74,0,0" VerticalAlignment="Top" Width="76" Click="Button_Remove_Click" Height="20" Grid.Column="1"/>
+        <Button Content="Edit" HorizontalAlignment="Left" Margin="405,114,0,0" VerticalAlignment="Top" Width="76" Click="Button_Edit_Click" Height="20" Grid.Column="1"/>
+        <ListView x:Name="listStudent" HorizontalAlignment="Left" Height="250" Margin="0,34,0,0" VerticalAlignment="Top" Width="254" Grid.Column="1">
             <ListView.View>
                 <GridView>
                     <GridViewColumn DisplayMemberBinding="{Binding Name}" Width="60" Header="Name"/>
@@ -24,7 +24,17 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button Content="Cancel" Grid.Column="1" HorizontalAlignment="Left" Margin="351,291,0,0" VerticalAlignment="Top" Width="42" Height="20" Click="Button_Cancel_Click"/>
+        <Button Content="Cancel" Grid.Column="1" HorizontalAlignment="Left" Margin="443,264,0,0" VerticalAlignment="Top" Width="47" Height="20" Click="Button_Cancel_Click"/>
+        <Label Content="Student" Grid.Column="1" HorizontalAlignment="Left" Margin="100,5,0,0" VerticalAlignment="Top" RenderTransformOrigin="-2.974,0.115"/>
+        <ListView Grid.Column="1" HorizontalAlignment="Left" Height="100" Margin="276,34,0,0" VerticalAlignment="Top" Width="106">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn DisplayMemberBinding="{Binding Name}" Width="100" Header="Name"/>
+
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Label Content="Martial arts" Grid.Column="1" HorizontalAlignment="Left" Margin="293,5,0,0" VerticalAlignment="Top"/>
 
 
 
