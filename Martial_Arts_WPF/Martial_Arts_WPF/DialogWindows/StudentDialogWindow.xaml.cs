@@ -30,6 +30,7 @@ namespace Martial_Arts_WPF.DialogWindows
             textAge.Text = student.Age.ToString();
             textBelt.Text = student.Belt.ToString();
             comboBoxCoaches.ItemsSource = Coach.coaches;
+            listMartialArts.ItemsSource = MartialArt.martialArts;
             Id_Student = student_Id;
         }
 
@@ -46,12 +47,12 @@ namespace Martial_Arts_WPF.DialogWindows
 
                 student.Age = Convert.ToInt16(textAge.Text);
                 student.Coach = (Coach)comboBoxCoaches.SelectedItem;
-
-                artStudent.MartialArt = (MartialArt)listMartialArts.SelectedItem;
-                artStudent.Student = student;
-                
-                ArtStudent.ArtStudents.Add(artStudent);
-
+                if ((MartialArt)listMartialArts.SelectedItem != null)
+                {
+                    artStudent.MartialArt = (MartialArt)listMartialArts.SelectedItem;
+                    artStudent.Student = student;
+                    ArtStudent.ArtStudents.Add(artStudent);
+                }
                 if(comboBoxCoaches.SelectedItem == null)
                 {
                     MessageBox.Show("Choose a coach");
@@ -62,10 +63,10 @@ namespace Martial_Arts_WPF.DialogWindows
                 this.Close();
                 studentWindow.Show();
             }
-            catch (Exception ex)
+            catch (Exception )
             {
 
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("Choose all categories");
             }
         }
 
@@ -74,17 +75,26 @@ namespace Martial_Arts_WPF.DialogWindows
             try
             {
                 Student student = new Student();
+                ArtStudent artStudent = new ArtStudent();
                 student.Name = textName.Text;
                 student.Surname = textSurname.Text;
                 student.Belt = textBelt.Text;
 
                 student.Age = Convert.ToInt16(textAge.Text);
                 student.Coach = (Coach)comboBoxCoaches.SelectedItem;
+                if ((MartialArt)listMartialArts.SelectedItem != null)
+                {
+                    artStudent.MartialArt = (MartialArt)listMartialArts.SelectedItem;
+                    artStudent.Student = student;
+                    ArtStudent.ArtStudents.Add(artStudent);
+                }
+
 
                 if (comboBoxCoaches.SelectedItem == null)
                 {
                     MessageBox.Show("Choose a coach");
                 }
+                
                 Student._students.RemoveAt(Id_Student);
                 Student._students.Insert(Id_Student, student);
               
@@ -95,7 +105,7 @@ namespace Martial_Arts_WPF.DialogWindows
             catch (Exception)
             {
 
-                MessageBox.Show("Invalid age");
+                MessageBox.Show("Choose right categories");
             }
         }
 

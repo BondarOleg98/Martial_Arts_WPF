@@ -3,6 +3,7 @@ using Martial_Arts.Data.Structure;
 using Martial_Arts.Data.Sportsman;
 using Martial_Arts_WPF.AdditionalWindows;
 using System;
+using Martial_Arts.Data.Relationship;
 
 namespace Martial_Arts_WPF.DialogWindows
 {
@@ -23,6 +24,7 @@ namespace Martial_Arts_WPF.DialogWindows
             InitializeComponent();
             textName.Text = martialArt.Name;
             listStudents.ItemsSource = Student._students;
+           
             Id_Art = art_Id;
         }
 
@@ -32,33 +34,62 @@ namespace Martial_Arts_WPF.DialogWindows
             {
 
                 MartialArt martialArt = new MartialArt();
+                ArtStudent artStudent = new ArtStudent();
                 martialArt.Name = textName.Text;
-             
-                //if (listStudents.SelectedItem == null)
-                //{
-                //    MessageBox.Show("Choose a coach");
-                //}
+                if ((Student)listStudents.SelectedItem != null)
+                {
+                    artStudent.Student = (Student)listStudents.SelectedItem;
+                    artStudent.MartialArt = martialArt;
+                    ArtStudent.ArtStudents.Add(artStudent);
+                }
+               
+                
 
                 MartialArt.martialArts.Add(martialArt);
                 MartialArtsWindow martialArtsWindow = new MartialArtsWindow();
                 this.Close();
                 martialArtsWindow.Show();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("Choose right categories");
             }
         }
 
         private void Button_Edit_Click(object sender, RoutedEventArgs e)
         {
+            try
+            {
 
+                MartialArt martialArt = new MartialArt();
+                ArtStudent artStudent = new ArtStudent();
+                martialArt.Name = textName.Text;
+                if ((Student)listStudents.SelectedItem != null)
+                {
+                    artStudent.Student = (Student)listStudents.SelectedItem;
+                    artStudent.MartialArt = martialArt;
+                    ArtStudent.ArtStudents.Add(artStudent);
+                }
+                MartialArt.martialArts.RemoveAt(Id_Art);
+                MartialArt.martialArts.Insert(Id_Art, martialArt);
+
+                MartialArtsWindow martialArtsWindow = new MartialArtsWindow();
+                this.Close();
+                martialArtsWindow.Show();
+            }
+            catch (Exception)
+            {
+
+                MessageBox.Show("Choose right categories");
+            }
         }
 
         private void Button_Cancel_Click(object sender, RoutedEventArgs e)
         {
-
+            MartialArtsWindow martialArt = new MartialArtsWindow();
+            martialArt.Show();
+            this.Close();
         }
     }
 }
