@@ -10,27 +10,43 @@ namespace Martial_Arts_WPF.DialogWindows
     /// </summary>
     public partial class StudentDialogWindow : Window
     {
+        private int Id_Student { get; set; }
+
         public StudentDialogWindow()
         {
             InitializeComponent();
-
-            foreach (var item in Coach.coaches)
-            {
-                RadioButton radiobutton = new RadioButton { Content = item.Name };
-                stackpanel.Children.Add(radiobutton);
-            }
+            comboBoxCoaches.ItemsSource = Coach.coaches;
+        }
+        public StudentDialogWindow(int student_Id, Student student)
+        {
+           
+            InitializeComponent();
+            textName.Text = student.Name;
+            textSurname.Text = student.Surname;
+            textAge.Text = student.Age.ToString();
+            textBelt.Text = student.Belt.ToString();
+            comboBoxCoaches.ItemsSource = Coach.coaches;
+            Id_Student = student_Id;
         }
 
         private void Button_Add_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                Student student = new Student(textName.Text, textSurname.Text, textBelt.Text, Convert.ToInt16(textAge.Text));
+                
+                Student student = new Student();
+                student.Name = textName.Text;
+                student.Surname = textSurname.Text;
+                student.Belt = textBelt.Text;
 
-                if ((Convert.ToInt16(textAge.Text)).GetType() == typeof(int))
+                student.Age = Convert.ToInt16(textAge.Text);
+                student.Coach = (Coach)comboBoxCoaches.SelectedItem;
+
+                if(comboBoxCoaches.SelectedItem == null)
                 {
-                    throw new Exception("Error 404: ");
+                    MessageBox.Show("Choose a coach");
                 }
+                
                 Student._students.Add(student);
                 StudentWindow studentWindow = new StudentWindow();
                 this.Close();
@@ -43,14 +59,42 @@ namespace Martial_Arts_WPF.DialogWindows
             }
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         private void Button_Edit_Click(object sender, RoutedEventArgs e)
         {
+            try
+            {
+                Student student = new Student();
+                student.Name = textName.Text;
+                student.Surname = textSurname.Text;
+                student.Belt = textBelt.Text;
 
+                student.Age = Convert.ToInt16(textAge.Text);
+                student.Coach = (Coach)comboBoxCoaches.SelectedItem;
+
+                if (comboBoxCoaches.SelectedItem == null)
+                {
+                    MessageBox.Show("Choose a coach");
+                }
+                Student._students.RemoveAt(Id_Student);
+                Student._students.Insert(Id_Student, student);
+              
+                StudentWindow studentWindow = new StudentWindow();            
+                studentWindow.Show();
+                this.Close();
+            }
+            catch (Exception)
+            {
+
+                MessageBox.Show("Invalid age");
+            }
+        }
+
+        private void Button_Cancel_Click(object sender, RoutedEventArgs e)
+        {
+           
+            StudentWindow studentWindow = new StudentWindow();          
+            studentWindow.Show();
+            this.Close();
         }
     }
 }

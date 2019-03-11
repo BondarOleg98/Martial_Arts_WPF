@@ -17,7 +17,7 @@ namespace Martial_Arts_WPF
         {
             CoachWindow coachWindow = new CoachWindow();
             this.Close();
-            coachWindow.ShowDialog();
+            coachWindow.Show();
         }
 
         private void Button_Exit(object sender, RoutedEventArgs e)
@@ -28,13 +28,15 @@ namespace Martial_Arts_WPF
         private void Button_Student(object sender, RoutedEventArgs e)
         {
             StudentWindow studenrWindow = new StudentWindow();
-            studenrWindow.ShowDialog();
+            this.Close();
+            studenrWindow.Show();
         }
 
         private void Button_Structure(object sender, RoutedEventArgs e)
         {
             StructureWindow structureWindow = new StructureWindow();
-            structureWindow.ShowDialog();
+            this.Close();
+            structureWindow.Show();
         }
     }
 }
