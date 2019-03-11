@@ -15,11 +15,6 @@ namespace Martial_Arts_WPF.DialogWindows
         public CoachDialogWindow(int coach_Id, Coach coach)
         {
             InitializeComponent();
-            //foreach (var item in Student.students)
-            //{
-            //    CheckBox checkBox = new CheckBox { Content = item.Name };
-            //    stackpanel.Children.Add(checkBox);
-            //}
             textName.Text = coach.Name;
             textSurname.Text = coach.Surname;
             textAge.Text = coach.Age.ToString();
@@ -30,13 +25,6 @@ namespace Martial_Arts_WPF.DialogWindows
         public CoachDialogWindow()
         {
             InitializeComponent();
-            foreach (var item in Student._students)
-            {
-                //    CheckBox checkBox = new CheckBox { Content = item.Name };
-                //    stackpanel.Children.Add(checkBox);
-                listBox.Items.Add(item);
-            }
-           
         }
 
         private void Button_Add_Click(object sender, RoutedEventArgs e)
@@ -47,16 +35,9 @@ namespace Martial_Arts_WPF.DialogWindows
               
                 if ((Convert.ToInt16(textAge.Text)).GetType() == typeof(int))
                 {
-                    throw new Exception("Error 404: ");
+                    throw new Exception("Error");
                 }
                 Coach.coaches.Add(coach);
-                
-              
-                Student stud = (Student)listBox.SelectedItem;
-                coach.Students.Add(stud);
-                
-
-               
                 CoachWindow coachWindow = new CoachWindow();
                 this.Close();
                 coachWindow.Show();
@@ -91,10 +72,10 @@ namespace Martial_Arts_WPF.DialogWindows
             }
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Button_Cancel_Click(object sender, RoutedEventArgs e)
         {
-            CoachWindow coachWindow = new CoachWindow();
             this.Close();
+            CoachWindow coachWindow = new CoachWindow();
             coachWindow.Show();
         }
     }

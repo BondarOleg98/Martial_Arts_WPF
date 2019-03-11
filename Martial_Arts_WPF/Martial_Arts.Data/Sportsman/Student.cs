@@ -1,15 +1,14 @@
 ﻿using System.Collections.Generic;
 using Martial_Arts.Data.Structure;
 using Martial_Arts.Data.Relationship;
-
-
+using System;
 
 namespace Martial_Arts.Data.Sportsman
 {
     public class Student : Person
     {
         private int yearsTraining;
-        
+        public Guid _coachId;
         public static List<Student> _students = new List<Student>();
 
         public Student(int yearsTraining, string sportsmanStatus, string likeCompetition,
@@ -21,8 +20,12 @@ namespace Martial_Arts.Data.Sportsman
             LikeCompetition = likeCompetition;
         }
 
-        public Student(string name, string surname, string belt, int age) :
-            base(name, surname, belt, age)
+        //public Student(string name, string surname, string belt, int age, Coach coach) :
+        //    base(name, surname, belt, age)
+        //{
+        //    Coach = coach;
+        // }
+        public Student()
         {
 
         }
@@ -42,8 +45,22 @@ namespace Martial_Arts.Data.Sportsman
             get { return yearsTraining; }
         }
 
-        public Coach Coach { get; }
+        //public Coach Coach { get; set; }
 
+        public Coach Coach
+        {
+            get
+            {
+                foreach (Coach coach in Coach.coaches)
+                    if (coach.Id == _coachId)
+                        return coach;
+                return null;
+            }
+            set
+            {
+                _coachId = value.Id;
+            }
+        }
 
         public List<MartialArt> MaterialArts
         {
