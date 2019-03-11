@@ -8,9 +8,11 @@ namespace Martial_Arts.Data.Relationship
     public class ArtStudent
     {
         public static List<ArtStudent> ArtStudents = new List<ArtStudent>();
+        //public static List<ArtStudent> _ArtStudents = new List<ArtStudent>();
 
-        private Guid _studentID;
-        private Guid _artID;
+        public static List<MartialArt> _martialArts = new List<MartialArt>();
+        public Guid _studentID;
+        public Guid _artID;
 
         public Student Student
         {
@@ -27,13 +29,13 @@ namespace Martial_Arts.Data.Relationship
                 _studentID = value.Id;
             }
         }
-        public MartialArt MaterialArt
+        public MartialArt MartialArt
         {
             get
             {
-                foreach (MartialArt materialArt in MartialArt.materialArts)
-                    if (materialArt.Id == _artID)
-                        return materialArt;
+                foreach (MartialArt martialArt in MartialArt.martialArts)
+                    if (martialArt.Id == _artID)
+                        return martialArt;
                 return null;
 
             }
@@ -42,5 +44,6 @@ namespace Martial_Arts.Data.Relationship
                 _artID = value.Id;
             }
         }
+    
     }
 }

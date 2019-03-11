@@ -74,9 +74,10 @@ namespace Martial_Arts_WPF.DialogWindows
 
         private void Button_Cancel_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
+           
             CoachWindow coachWindow = new CoachWindow();
             coachWindow.Show();
+            this.Close();
         }
     }
 }

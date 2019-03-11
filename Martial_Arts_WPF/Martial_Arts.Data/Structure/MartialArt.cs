@@ -7,8 +7,8 @@ namespace Martial_Arts.Data.Structure
 {
     public class MartialArt : Base
     {
-        public static List<MartialArt> materialArts = new List<MartialArt>();
-
+        public static List<MartialArt> martialArts = new List<MartialArt>();
+        public static List<MartialArt> _martialArts = new List<MartialArt>();
         public Guid _fedId;
         private int countCountry;
         public MartialArt()
@@ -53,7 +53,7 @@ namespace Martial_Arts.Data.Structure
             {
                 List<Student> result = new List<Student>();
                 foreach (ArtStudent cia in ArtStudent.ArtStudents)
-                    if (cia.MaterialArt == this)
+                    if (cia.MartialArt == this)
                         result.Add(cia.Student);
                 return result;
             }
@@ -77,7 +77,7 @@ namespace Martial_Arts.Data.Structure
             {
                 List<ArtStudent> result = new List<ArtStudent>();
                 foreach (ArtStudent sia in ArtStudent.ArtStudents)
-                    if (sia.MaterialArt == this)
+                    if (sia.MartialArt == this)
                         result.Add(sia);
                 return result;
             }
@@ -108,6 +108,10 @@ namespace Martial_Arts.Data.Structure
             {
                 _fedId = value.Id;
             }
+        }
+        public override string ToString()
+        {
+            return Name;
         }
     }
 }
