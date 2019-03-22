@@ -12,6 +12,11 @@ namespace Martial_Arts.Data.Structure
         public Guid _clubId;
         public string NamePresident { get; set; }
         public string Name { get; set; }
+
+        public Federation()
+        {
+
+        }
         public int CountCoaches
         {
             set

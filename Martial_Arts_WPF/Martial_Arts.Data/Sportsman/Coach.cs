@@ -11,8 +11,9 @@ namespace Martial_Arts.Data.Sportsman
     {
         public static List<Coach> coaches = new List<Coach>();
         public static List<Student> students = new List<Student>();
-
+        [NonSerialized]
         private int countStudents;
+        [NonSerialized]
         private int yearStartCareer;
         public Guid _studentId;
         public Guid _clubId;

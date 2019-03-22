@@ -2,25 +2,27 @@
 using Martial_Arts.Data.Structure;
 using Martial_Arts.Data.Relationship;
 using System;
+using System.Xml.Serialization;
 
 namespace Martial_Arts.Data.Sportsman
 {
     [Serializable]
     public class Student : Person
     {
+        [NonSerialized]
         private int yearsTraining;
         public Guid _coachId;
         public static List<Student> _students = new List<Student>();
         public static List<Student> Students = new List<Student>();
 
-        public Student(int yearsTraining, string sportsmanStatus, string likeCompetition,
-            string name, string surname, string belt, string sportTitle, int age, string country) :
-            base(name, surname, belt, sportTitle, age, country)
-        {
-            YearsTraining = yearsTraining;
-            SportsmanStatus = sportsmanStatus;
-            LikeCompetition = likeCompetition;
-        }
+        //public Student(int yearsTraining, string sportsmanStatus, string likeCompetition,
+        //    string name, string surname, string belt, string sportTitle, int age, string country) :
+        //    base(name, surname, belt, sportTitle, age, country)
+        //{
+        //    YearsTraining = yearsTraining;
+        //    SportsmanStatus = sportsmanStatus;
+        //    LikeCompetition = likeCompetition;
+        //}
 
         //public Student(string name, string surname, string belt, int age, Coach coach) :
         //    base(name, surname, belt, age)
@@ -31,9 +33,11 @@ namespace Martial_Arts.Data.Sportsman
         {
 
         }
-
+  
         public string LikeCompetition { get; set; }
+
         public string SportsmanStatus { get; set; }
+        [XmlIgnore]
         public int YearsTraining
         {
             set
@@ -49,6 +53,7 @@ namespace Martial_Arts.Data.Sportsman
 
         //public Coach Coach { get; set; }
 
+        [XmlIgnore]
         public Coach Coach
         {
             get
@@ -63,7 +68,7 @@ namespace Martial_Arts.Data.Sportsman
                 _coachId = value.Id;
             }
         }
-
+        [XmlIgnore]
         public List<MartialArt> MartialArts
         {
             get
@@ -76,6 +81,7 @@ namespace Martial_Arts.Data.Sportsman
             }
 
         }
+        [XmlIgnore]
         public List<ArtStudent> ArtStudents
         {
             get

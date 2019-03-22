@@ -14,7 +14,10 @@ namespace Martial_Arts.Data.Structure
             Name = name;
             Address = address;
         }
+        public Club()
+        {
 
+        }
         public Coach Coach { get; }
         public Federation Federation { get; }
 

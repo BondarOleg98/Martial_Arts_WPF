@@ -4,6 +4,7 @@ using System.Text;
 
 namespace Martial_Arts.Data
 {
+    [Serializable]
     public class Base
     {
         public Guid Id { get; set; }

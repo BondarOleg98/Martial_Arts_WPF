@@ -3,10 +3,10 @@
 
 namespace Martial_Arts.Data
 {
-    [Serializable]
     public class Person : Base
     {
         private int age;
+       
         public string Country { get; set; }
         public string Belt { get; set; }
         public string SportTitle { get; set; }

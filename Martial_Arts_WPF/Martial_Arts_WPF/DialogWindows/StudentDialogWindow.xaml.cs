@@ -38,8 +38,8 @@ namespace Martial_Arts_WPF.DialogWindows
 
         private void Button_Add_Click(object sender, RoutedEventArgs e)
         {
-            //try
-            //{
+            try
+            {
                 
                 Student student = new Student();
                 ArtStudent artStudent = new ArtStudent();
@@ -61,22 +61,23 @@ namespace Martial_Arts_WPF.DialogWindows
                 }
                 
                 Student._students.Add(student);
-                XmlSerializer xmlSerializer = new XmlSerializer(typeof(Student));
+
+                XmlSerializer xmlSerializer = new XmlSerializer(typeof(List<Student>));
 
                 using (FileStream fs = new FileStream("people.xml", FileMode.OpenOrCreate))
                 {
-                    xmlSerializer.Serialize(fs, student);
+                    xmlSerializer.Serialize(fs, Student._students);
                 }
 
                 StudentWindow studentWindow = new StudentWindow();
                 this.Close();
                 studentWindow.Show();
-           // }
-            //catch (Exception )
-            //{
+            }
+            catch (Exception )
+            {
 
                 MessageBox.Show("Choose all categories");
-            //}
+            }
         }
 
         private void Button_Edit_Click(object sender, RoutedEventArgs e)
