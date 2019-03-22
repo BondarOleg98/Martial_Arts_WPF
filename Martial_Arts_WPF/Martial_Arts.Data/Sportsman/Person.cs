@@ -1,9 +1,9 @@
 ﻿using System;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
+
 
 namespace Martial_Arts.Data
 {
+    [Serializable]
     public class Person : Base
     {
         private int age;
@@ -45,5 +45,6 @@ namespace Martial_Arts.Data
             Belt = belt;
             this.age = age;
         }
+        
     }
 }

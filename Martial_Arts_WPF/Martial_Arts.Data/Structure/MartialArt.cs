@@ -5,6 +5,7 @@ using Martial_Arts.Data.Relationship;
 
 namespace Martial_Arts.Data.Structure
 {
+    [Serializable]
     public class MartialArt : Base
     {
         public static List<MartialArt> martialArts = new List<MartialArt>();

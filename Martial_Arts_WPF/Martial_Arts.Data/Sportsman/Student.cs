@@ -5,6 +5,7 @@ using System;
 
 namespace Martial_Arts.Data.Sportsman
 {
+    [Serializable]
     public class Student : Person
     {
         private int yearsTraining;

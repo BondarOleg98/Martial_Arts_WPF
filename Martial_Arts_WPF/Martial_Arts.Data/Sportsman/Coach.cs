@@ -6,6 +6,7 @@ using System.Linq;
 
 namespace Martial_Arts.Data.Sportsman
 {
+    [Serializable]
     public class Coach : Person
     {
         public static List<Coach> coaches = new List<Coach>();

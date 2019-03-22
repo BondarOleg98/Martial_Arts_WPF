@@ -5,6 +5,8 @@ using Martial_Arts.Data.Sportsman;
 using Martial_Arts_WPF.AdditionalWindows;
 using Martial_Arts.Data.Structure;
 using System.Collections.Generic;
+using System.Xml.Serialization;
+using System.IO;
 
 namespace Martial_Arts_WPF.DialogWindows
 {
@@ -36,8 +38,8 @@ namespace Martial_Arts_WPF.DialogWindows
 
         private void Button_Add_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
+            //try
+            //{
                 
                 Student student = new Student();
                 ArtStudent artStudent = new ArtStudent();
@@ -59,15 +61,22 @@ namespace Martial_Arts_WPF.DialogWindows
                 }
                 
                 Student._students.Add(student);
+                XmlSerializer xmlSerializer = new XmlSerializer(typeof(Student));
+
+                using (FileStream fs = new FileStream("people.xml", FileMode.OpenOrCreate))
+                {
+                    xmlSerializer.Serialize(fs, student);
+                }
+
                 StudentWindow studentWindow = new StudentWindow();
                 this.Close();
                 studentWindow.Show();
-            }
-            catch (Exception )
-            {
+           // }
+            //catch (Exception )
+            //{
 
                 MessageBox.Show("Choose all categories");
-            }
+            //}
         }
 
         private void Button_Edit_Click(object sender, RoutedEventArgs e)

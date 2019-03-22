@@ -1,4 +1,7 @@
-﻿using System.Windows;
+﻿using System.IO;
+using System.Windows;
+using System.Xml.Serialization;
+using Martial_Arts.Data;
 using Martial_Arts_WPF.AdditionalWindows;
 namespace Martial_Arts_WPF
 {
