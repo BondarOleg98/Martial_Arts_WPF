@@ -3,17 +3,17 @@ using System.Collections.Generic;
 using Martial_Arts.Data.Sportsman;
 using Martial_Arts.Data.Relationship;
 using System.Xml.Serialization;
+using System.Runtime.Serialization;
 
 namespace Martial_Arts.Data.Structure
 {
-    [Serializable]
+    [DataContract]
     public class MartialArt : Base
     {
         public static List<MartialArt> martialArts = new List<MartialArt>();
         public static List<MartialArt> _martialArts = new List<MartialArt>();
         public Guid _fedId;
-        [NonSerialized]
-        [XmlIgnore]
+
         private int countCountry;
         public MartialArt()
         {
@@ -30,6 +30,7 @@ namespace Martial_Arts.Data.Structure
                 else { countCountry = value; }
             }
         }
+        [DataMember]
         public string Name { get; set; }
 
         public MartialArt(string name, int countCountry)
@@ -50,7 +51,7 @@ namespace Martial_Arts.Data.Structure
             }
 
         }
-
+  
         public List<Student> Students
         {
             get
@@ -75,6 +76,7 @@ namespace Martial_Arts.Data.Structure
                 return result;
             }
         }
+
         public List<ArtStudent> ArtStudents
         {
             get

@@ -23,7 +23,7 @@ namespace Martial_Arts_WPF.DialogWindows
             comboBoxCoaches.ItemsSource = Coach.coaches;
             listMartialArts.ItemsSource = MartialArt.martialArts;
         }
-        public StudentDialogWindow(int student_Id, Student student)
+        public StudentDialogWindow(int student_Id, Student student, Coach coach)
         {
            
             InitializeComponent();
@@ -38,9 +38,9 @@ namespace Martial_Arts_WPF.DialogWindows
 
         private void Button_Add_Click(object sender, RoutedEventArgs e)
         {
-            //try
-            //{
-                
+            try
+            {
+
                 Student student = new Student();
                 ArtStudent artStudent = new ArtStudent();
                 student.Name = textName.Text;
@@ -55,29 +55,22 @@ namespace Martial_Arts_WPF.DialogWindows
                     artStudent.Student = student;
                     ArtStudent.ArtStudents.Add(artStudent);
                 }
-                if(comboBoxCoaches.SelectedItem == null)
+                if (comboBoxCoaches.SelectedItem == null)
                 {
                     MessageBox.Show("Choose a coach");
                 }
-                
+
                 Student._students.Add(student);
-
-                XmlSerializer xmlSerializer = new XmlSerializer(typeof(List<Student>));
-
-                using (FileStream fs = new FileStream("student.xml", FileMode.OpenOrCreate))
-                {
-                    xmlSerializer.Serialize(fs, Student._students);
-                }
 
                 StudentWindow studentWindow = new StudentWindow();
                 this.Close();
                 studentWindow.Show();
-            //}
-            //catch (Exception )
-            //{
+            }
+            catch (Exception)
+            {
 
-            //    MessageBox.Show("Choose all categories");
-            //}
+                MessageBox.Show("Choose all categories");
+            }
         }
 
         private void Button_Edit_Click(object sender, RoutedEventArgs e)
@@ -92,17 +85,20 @@ namespace Martial_Arts_WPF.DialogWindows
 
                 student.Age = Convert.ToInt16(textAge.Text);
                 student.Coach = (Coach)comboBoxCoaches.SelectedItem;
-                if ((MartialArt)listMartialArts.SelectedItem != null)
+                if ((MartialArt)listMartialArts.SelectedItem == null)
+                {
+                    throw new Exception();
+                }
+                else
                 {
                     artStudent.MartialArt = (MartialArt)listMartialArts.SelectedItem;
                     artStudent.Student = student;
                     ArtStudent.ArtStudents.Add(artStudent);
                 }
 
-
                 if (comboBoxCoaches.SelectedItem == null)
                 {
-                    MessageBox.Show("Choose a coach");
+                    throw new Exception();
                 }
                 
                 Student._students.RemoveAt(Id_Student);

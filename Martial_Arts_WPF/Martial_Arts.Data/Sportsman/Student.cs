@@ -3,6 +3,7 @@ using Martial_Arts.Data.Structure;
 using Martial_Arts.Data.Relationship;
 using System;
 using System.Xml.Serialization;
+using System.Runtime.Serialization;
 
 namespace Martial_Arts.Data.Sportsman
 {
@@ -15,20 +16,6 @@ namespace Martial_Arts.Data.Sportsman
         public static List<Student> _students = new List<Student>();
         public static List<Student> Students = new List<Student>();
 
-        //public Student(int yearsTraining, string sportsmanStatus, string likeCompetition,
-        //    string name, string surname, string belt, string sportTitle, int age, string country) :
-        //    base(name, surname, belt, sportTitle, age, country)
-        //{
-        //    YearsTraining = yearsTraining;
-        //    SportsmanStatus = sportsmanStatus;
-        //    LikeCompetition = likeCompetition;
-        //}
-
-        //public Student(string name, string surname, string belt, int age, Coach coach) :
-        //    base(name, surname, belt, age)
-        //{
-        //    Coach = coach;
-        // }
         public Student()
         {
 
@@ -50,8 +37,6 @@ namespace Martial_Arts.Data.Sportsman
             }
             get { return yearsTraining; }
         }
-
-        //public Coach Coach { get; set; }
 
         [XmlIgnore]
         public Coach Coach

@@ -6,6 +6,7 @@ using Martial_Arts.Data.Relationship;
 using System.Xml.Serialization;
 using System.IO;
 using System.Collections.Generic;
+using System.Runtime.Serialization.Json;
 
 namespace Martial_Arts_WPF.AdditionalWindows
 {
@@ -16,15 +17,6 @@ namespace Martial_Arts_WPF.AdditionalWindows
     {
         public StudentWindow()
         {
-            XmlSerializer formatter = new XmlSerializer(typeof(List<Student>));
-
-            List<Student> newstudent;
-            using (FileStream fs = new FileStream("student.xml", FileMode.OpenOrCreate))
-            {
-                newstudent = (List<Student>)formatter.Deserialize(fs);
-
-            }
-            Student._students = newstudent;
             InitializeComponent();
             listStudent.ItemsSource = Student._students;
             listStudent.Items.Refresh();
@@ -57,7 +49,7 @@ namespace Martial_Arts_WPF.AdditionalWindows
             }
             else
             {      
-                StudentDialogWindow studentDialogWindow = new StudentDialogWindow(student_Id, student);            
+                StudentDialogWindow studentDialogWindow = new StudentDialogWindow(student_Id, student, student.Coach);            
                 studentDialogWindow.bt_Add.IsEnabled = false;                
                 studentDialogWindow.Show();
                 this.Close();
@@ -67,7 +59,7 @@ namespace Martial_Arts_WPF.AdditionalWindows
         private void Button_Cancel_Click(object sender, RoutedEventArgs e)
         {
            
-            MainWindow mainWindow = new MainWindow();
+            MainWindow mainWindow = new MainWindow(1);
           
             mainWindow.Show();
             this.Close();
@@ -86,6 +78,7 @@ namespace Martial_Arts_WPF.AdditionalWindows
                  listMartialArts.Items.Refresh();
 
             }
+
         }
     }
 }

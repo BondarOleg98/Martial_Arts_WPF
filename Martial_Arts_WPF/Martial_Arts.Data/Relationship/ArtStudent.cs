@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
+using System.Xml.Serialization;
 using Martial_Arts.Data.Sportsman;
 using Martial_Arts.Data.Structure;
 
@@ -8,12 +10,17 @@ namespace Martial_Arts.Data.Relationship
     public class ArtStudent
     {
         public static List<ArtStudent> ArtStudents = new List<ArtStudent>();
-        //public static List<ArtStudent> _ArtStudents = new List<ArtStudent>();
 
         public static List<MartialArt> _martialArts = new List<MartialArt>();
+
+        public ArtStudent()
+        {
+
+        }
         public Guid _studentID;
         public Guid _artID;
 
+        
         public Student Student
         {
             get

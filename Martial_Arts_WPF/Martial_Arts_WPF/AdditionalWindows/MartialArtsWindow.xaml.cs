@@ -2,6 +2,11 @@
 using Martial_Arts_WPF.DialogWindows;
 using Martial_Arts.Data.Structure;
 using Martial_Arts.Data.Sportsman;
+using System.Xml.Serialization;
+using System.Collections.Generic;
+using System.IO;
+using System.Runtime.Serialization.Json;
+
 namespace Martial_Arts_WPF.AdditionalWindows
 {
     /// <summary>
@@ -53,7 +58,7 @@ namespace Martial_Arts_WPF.AdditionalWindows
 
         private void Button_Cancel_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow mainWindow = new MainWindow();
+            MainWindow mainWindow = new MainWindow(1);
 
             mainWindow.Show();
             this.Close();
@@ -73,6 +78,7 @@ namespace Martial_Arts_WPF.AdditionalWindows
                 listStudent.Items.Refresh();
 
             }
+           
         }
     }
 }

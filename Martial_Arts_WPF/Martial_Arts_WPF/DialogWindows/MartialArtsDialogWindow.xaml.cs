@@ -45,20 +45,13 @@ namespace Martial_Arts_WPF.DialogWindows
                     artStudent.MartialArt = martialArt;
                     ArtStudent.ArtStudents.Add(artStudent);
                 }
-               
-                
-
+                             
                 MartialArt.martialArts.Add(martialArt);
+
                 MartialArtsWindow martialArtsWindow = new MartialArtsWindow();
+          
                 this.Close();
                 martialArtsWindow.Show();
-
-                XmlSerializer xmlSerializer = new XmlSerializer(typeof(List<MartialArt>));
-
-                using (FileStream fs = new FileStream("martial_art.xml", FileMode.OpenOrCreate))
-                {
-                    xmlSerializer.Serialize(fs, MartialArt._martialArts);
-                }
 
             }
             catch (Exception)
@@ -84,10 +77,11 @@ namespace Martial_Arts_WPF.DialogWindows
                 }
                 MartialArt.martialArts.RemoveAt(Id_Art);
                 MartialArt.martialArts.Insert(Id_Art, martialArt);
-
+               
                 MartialArtsWindow martialArtsWindow = new MartialArtsWindow();
-                this.Close();
+               
                 martialArtsWindow.Show();
+                this.Close();
             }
             catch (Exception)
             {

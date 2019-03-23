@@ -1,17 +1,26 @@
-﻿using System;
-
+﻿using Martial_Arts.Data.Sportsman;
+using System;
+using System.Runtime.Serialization;
 
 namespace Martial_Arts.Data
 {
+    [DataContract]
+    [KnownType(typeof(Student))]
+    [KnownType(typeof(Coach))]
     public class Person : Base
     {
-        
+        [DataMember]
         private int age;
        
         public string Country { get; set; }
+        [DataMember]
         public string Belt { get; set; }
         public string SportTitle { get; set; }
+
+        [DataMember]
         public string Name { get; set; }
+
+        [DataMember]
         public string Surname { get; set; }
 
         public Person()

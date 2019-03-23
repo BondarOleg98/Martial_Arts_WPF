@@ -3,6 +3,10 @@ using System.Windows;
 using Martial_Arts.Data.Sportsman;
 using Martial_Arts_WPF.DialogWindows;
 using Martial_Arts.Data;
+using System.Xml.Serialization;
+using System.Collections.Generic;
+using System.IO;
+
 namespace Martial_Arts_WPF.AdditionalWindows
 {
     /// <summary>
@@ -12,6 +16,7 @@ namespace Martial_Arts_WPF.AdditionalWindows
     {
         public CoachWindow()
         {
+
             InitializeComponent();
             listCoach.ItemsSource = Coach.coaches;
             listCoach.Items.Refresh();
@@ -58,7 +63,7 @@ namespace Martial_Arts_WPF.AdditionalWindows
         private void Button_Cancel_Click(object sender, RoutedEventArgs e)
         {
           
-            MainWindow mainWindow = new MainWindow();
+            MainWindow mainWindow = new MainWindow(1);
             this.Close();
             mainWindow.Show();
         }

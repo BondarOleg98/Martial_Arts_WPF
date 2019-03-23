@@ -43,12 +43,7 @@ namespace Martial_Arts_WPF.DialogWindows
                 Coach.coaches.Add(coach);
                 CoachWindow coachWindow = new CoachWindow();
 
-                XmlSerializer xmlSerializer = new XmlSerializer(typeof(List<Coach>));
-
-                using (FileStream fs = new FileStream("coach.xml", FileMode.OpenOrCreate))
-                {
-                    xmlSerializer.Serialize(fs, Coach.coaches);
-                }
+               
 
                 StudentWindow studentWindow = new StudentWindow();
 
