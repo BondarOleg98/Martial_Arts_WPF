@@ -73,7 +73,6 @@ namespace Martial_Arts_WPF.AdditionalWindows
             {
                 if(item._coachId == Coaches.Id)
                 {
-
                     Coach.students.Add(item);
                     listStudents.ItemsSource = Coach.students;
                     listStudents.Items.Refresh();

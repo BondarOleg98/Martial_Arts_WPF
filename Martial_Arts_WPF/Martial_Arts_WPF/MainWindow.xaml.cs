@@ -1,7 +1,10 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
+using System.Runtime.Serialization;
 using System.Windows;
 using System.Xml.Serialization;
 using Martial_Arts.Data;
+using Martial_Arts.Data.Sportsman;
 using Martial_Arts_WPF.AdditionalWindows;
 namespace Martial_Arts_WPF
 {
@@ -12,8 +15,7 @@ namespace Martial_Arts_WPF
     {
         public MainWindow()
         {
-            InitializeComponent();  
-            
+            InitializeComponent();
         }
 
         private void Button_Coach(object sender, RoutedEventArgs e)

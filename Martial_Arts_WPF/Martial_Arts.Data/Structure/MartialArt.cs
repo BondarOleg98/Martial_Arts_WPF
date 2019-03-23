@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Martial_Arts.Data.Sportsman;
 using Martial_Arts.Data.Relationship;
+using System.Xml.Serialization;
 
 namespace Martial_Arts.Data.Structure
 {
@@ -11,6 +12,8 @@ namespace Martial_Arts.Data.Structure
         public static List<MartialArt> martialArts = new List<MartialArt>();
         public static List<MartialArt> _martialArts = new List<MartialArt>();
         public Guid _fedId;
+        [NonSerialized]
+        [XmlIgnore]
         private int countCountry;
         public MartialArt()
         {

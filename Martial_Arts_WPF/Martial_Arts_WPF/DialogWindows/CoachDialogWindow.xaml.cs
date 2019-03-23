@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
+using System.Xml.Serialization;
 using Martial_Arts.Data.Sportsman;
 using Martial_Arts_WPF.AdditionalWindows;
 namespace Martial_Arts_WPF.DialogWindows
@@ -39,6 +42,16 @@ namespace Martial_Arts_WPF.DialogWindows
                 }
                 Coach.coaches.Add(coach);
                 CoachWindow coachWindow = new CoachWindow();
+
+                XmlSerializer xmlSerializer = new XmlSerializer(typeof(List<Coach>));
+
+                using (FileStream fs = new FileStream("coach.xml", FileMode.OpenOrCreate))
+                {
+                    xmlSerializer.Serialize(fs, Coach.coaches);
+                }
+
+                StudentWindow studentWindow = new StudentWindow();
+
                 this.Close();
                 coachWindow.Show();
             }

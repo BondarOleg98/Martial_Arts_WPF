@@ -4,6 +4,9 @@ using Martial_Arts.Data.Sportsman;
 using Martial_Arts_WPF.AdditionalWindows;
 using System;
 using Martial_Arts.Data.Relationship;
+using System.Xml.Serialization;
+using System.Collections.Generic;
+using System.IO;
 
 namespace Martial_Arts_WPF.DialogWindows
 {
@@ -49,6 +52,14 @@ namespace Martial_Arts_WPF.DialogWindows
                 MartialArtsWindow martialArtsWindow = new MartialArtsWindow();
                 this.Close();
                 martialArtsWindow.Show();
+
+                XmlSerializer xmlSerializer = new XmlSerializer(typeof(List<MartialArt>));
+
+                using (FileStream fs = new FileStream("martial_art.xml", FileMode.OpenOrCreate))
+                {
+                    xmlSerializer.Serialize(fs, MartialArt._martialArts);
+                }
+
             }
             catch (Exception)
             {

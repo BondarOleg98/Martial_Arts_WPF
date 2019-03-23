@@ -33,9 +33,9 @@ namespace Martial_Arts.Data.Sportsman
         {
 
         }
-  
+        [XmlIgnore]
         public string LikeCompetition { get; set; }
-
+        [XmlIgnore]
         public string SportsmanStatus { get; set; }
         [XmlIgnore]
         public int YearsTraining

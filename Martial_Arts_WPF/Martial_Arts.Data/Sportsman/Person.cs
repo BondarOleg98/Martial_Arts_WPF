@@ -5,6 +5,7 @@ namespace Martial_Arts.Data
 {
     public class Person : Base
     {
+        
         private int age;
        
         public string Country { get; set; }

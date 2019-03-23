@@ -3,6 +3,10 @@ using Martial_Arts_WPF.DialogWindows;
 using Martial_Arts.Data.Sportsman;
 using Martial_Arts.Data.Structure;
 using Martial_Arts.Data.Relationship;
+using System.Xml.Serialization;
+using System.IO;
+using System.Collections.Generic;
+
 namespace Martial_Arts_WPF.AdditionalWindows
 {
     /// <summary>
@@ -12,6 +16,15 @@ namespace Martial_Arts_WPF.AdditionalWindows
     {
         public StudentWindow()
         {
+            XmlSerializer formatter = new XmlSerializer(typeof(List<Student>));
+
+            List<Student> newstudent;
+            using (FileStream fs = new FileStream("student.xml", FileMode.OpenOrCreate))
+            {
+                newstudent = (List<Student>)formatter.Deserialize(fs);
+
+            }
+            Student._students = newstudent;
             InitializeComponent();
             listStudent.ItemsSource = Student._students;
             listStudent.Items.Refresh();

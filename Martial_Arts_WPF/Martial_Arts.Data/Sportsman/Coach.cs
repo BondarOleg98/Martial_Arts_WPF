@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Martial_Arts.Data.Structure;
 using Martial_Arts.Data.Relationship;
 using System.Linq;
+using System.Xml.Serialization;
 
 namespace Martial_Arts.Data.Sportsman
 {
@@ -11,12 +12,16 @@ namespace Martial_Arts.Data.Sportsman
     {
         public static List<Coach> coaches = new List<Coach>();
         public static List<Student> students = new List<Student>();
+
         [NonSerialized]
+        [XmlIgnore]
         private int countStudents;
+
         [NonSerialized]
+        [XmlIgnore]
         private int yearStartCareer;
-        public Guid _studentId;
-        public Guid _clubId;
+       // public Guid _studentId;
+       // public Guid _clubId;
         public Coach(string name)
         {
             Name = name;
@@ -26,6 +31,7 @@ namespace Martial_Arts.Data.Sportsman
         {
 
         }
+        [XmlIgnore]
         public int YearStartCareer
         {
             set
@@ -38,7 +44,7 @@ namespace Martial_Arts.Data.Sportsman
             }
             get { return yearStartCareer; }
         }
-
+        [XmlIgnore]
         public int CountStudents
         {
             set
@@ -54,6 +60,7 @@ namespace Martial_Arts.Data.Sportsman
             }
             get { return countStudents; }
         }
+        [XmlIgnore]
         public string JudgeCategory { get; set; }
 
         public Coach(int countStudents, string judgeCategory, int yearStartCareer,
@@ -70,7 +77,7 @@ namespace Martial_Arts.Data.Sportsman
         {
 
         }
-
+       
         public List<Student> Students
         {
             get
@@ -83,21 +90,22 @@ namespace Martial_Arts.Data.Sportsman
             }
 
         }
-        public Student student
-        {
-            get
-            {
-                foreach (Student student in Student._students)
-                    if (student.Id == _studentId)
-                        return student;
-                return null;
-            }
-            set
-            {
-                _studentId = value.Id;
-            }
-        }
-
+       //// [XmlIgnore]
+       // public Student student
+       // {
+       //     get
+       //     {
+       //         foreach (Student student in Student._students)
+       //             if (student.Id == _studentId)
+       //                 return student;
+       //         return null;
+       //     }
+       //     set
+       //     {
+       //         _studentId = value.Id;
+       //     }
+       // }
+        [XmlIgnore]
         public List<MartialArt> MaterialArts
         {
             get
@@ -110,6 +118,7 @@ namespace Martial_Arts.Data.Sportsman
             }
 
         }
+        [XmlIgnore]
         public List<ArtCoach> ArtCoaches
         {
             get
@@ -121,7 +130,7 @@ namespace Martial_Arts.Data.Sportsman
                 return result;
             }
         }
-
+        [XmlIgnore]
         public List<Club> Clubs
         {
             get
@@ -134,20 +143,21 @@ namespace Martial_Arts.Data.Sportsman
             }
 
         }
-        public Club club
-        {
-            get
-            {
-                foreach (Club club in Club.Clubs)
-                    if (club.Id == _clubId)
-                        return club;
-                return null;
-            }
-            set
-            {
-                _clubId = value.Id;
-            }
-        }
+        //[XmlIgnore]
+        //public Club club
+        //{
+        //    get
+        //    {
+        //        foreach (Club club in Club.Clubs)
+        //            if (club.Id == _clubId)
+        //                return club;
+        //        return null;
+        //    }
+        //    set
+        //    {
+        //        _clubId = value.Id;
+        //    }
+        //}
 
         public int CountClubs(List<Club> clubs)
         {
