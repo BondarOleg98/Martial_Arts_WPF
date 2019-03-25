@@ -23,7 +23,7 @@ namespace Martial_Arts_WPF
             XmlSerializer xmlSerializerStudent = new XmlSerializer(typeof(List<Student>));
             DataContractSerializer dataContractSerializer = new DataContractSerializer(typeof(List<Coach>));
             DataContractJsonSerializer jsonSerializer = new DataContractJsonSerializer(typeof(List<MartialArt>));
-         
+
             using (FileStream fs = new FileStream("student.xml", FileMode.OpenOrCreate))
             {
                 Student._students = (List<Student>)xmlSerializerStudent.Deserialize(fs);
