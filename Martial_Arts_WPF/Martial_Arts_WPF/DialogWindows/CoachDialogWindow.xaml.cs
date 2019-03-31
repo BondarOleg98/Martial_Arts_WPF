@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data.SqlClient;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
@@ -41,11 +43,20 @@ namespace Martial_Arts_WPF.DialogWindows
                     throw new Exception("Error");
                 }
                 Coach.coaches.Add(coach);
-                CoachWindow coachWindow = new CoachWindow();
-
-               
+                CoachWindow coachWindow = new CoachWindow();            
 
                 StudentWindow studentWindow = new StudentWindow();
+
+                string stringConnection = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Oleg\Documents\martial_artDB.mdf;Integrated Security=True;Connect Timeout=30";
+        
+                string sqlExpression = "INSERT INTO Coach (Name, Age) VALUES ('Tom', 18)";
+                using (SqlConnection connection = new SqlConnection(stringConnection))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand(sqlExpression,connection);
+                   
+                }
+
 
                 this.Close();
                 coachWindow.Show();

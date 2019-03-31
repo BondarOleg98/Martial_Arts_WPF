@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Configuration;
+using System.Data.SqlClient;
 using System.IO;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Json;
@@ -42,6 +44,7 @@ namespace Martial_Arts_WPF
             {
                 ArtStudent.ArtStudents = (List<ArtStudent>)jsonArtStudent.ReadObject(fs);
             }
+
         }
         public MainWindow(int flag)
         {
