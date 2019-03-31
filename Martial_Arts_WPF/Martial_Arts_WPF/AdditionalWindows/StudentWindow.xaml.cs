@@ -37,6 +37,21 @@ namespace Martial_Arts_WPF.AdditionalWindows
             var student = (Student)listStudent.SelectedItem;
             Student._students.Remove(student);
             listStudent.Items.Refresh();
+           
+            ArtStudent artStudent = new ArtStudent();
+            foreach (var item in student.MartialArts)
+            {
+                if(item.Id == student.Id)
+                {
+                    artStudent.MartialArt = item;
+                    artStudent.Student = student;
+                    ArtStudent.ArtStudents.Remove(artStudent);
+                }
+            }
+
+            MartialArt._martialArts.Clear();
+            listMartialArts.ItemsSource = MartialArt._martialArts;
+            listMartialArts.Items.Refresh();
         }
 
         private void Button_Edit_Click(object sender, RoutedEventArgs e)
@@ -70,14 +85,21 @@ namespace Martial_Arts_WPF.AdditionalWindows
             MartialArt._martialArts.Clear();
             listMartialArts.ItemsSource = MartialArt._martialArts;
             listMartialArts.Items.Refresh();
-            var Students = (Student)listStudent.SelectedItem;
-            foreach (MartialArt item in Students.MartialArts)
+            Student Students = (Student)listStudent.SelectedItem;
+            if (Students != null)
             {
-                 MartialArt._martialArts.Add(item);
-                 listMartialArts.ItemsSource = MartialArt._martialArts;
-                 listMartialArts.Items.Refresh();
+                foreach (MartialArt item in Students.MartialArts)
+                {
+                    if (item != null)
+                    {
+                        MartialArt._martialArts.Add(item);
+                        listMartialArts.ItemsSource = MartialArt._martialArts;
+                        listMartialArts.Items.Refresh();
+                    }
 
+                }
             }
+           
 
         }
     }
