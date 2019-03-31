@@ -26,7 +26,7 @@ namespace Martial_Arts_WPF
             DataContractSerializer dataContractSerializer = new DataContractSerializer(typeof(List<Coach>));
             DataContractJsonSerializer jsonSerializer = new DataContractJsonSerializer(typeof(List<MartialArt>));
 
-            using (FileStream fs = new FileStream("student.xml", FileMode.OpenOrCreate))
+            using (FileStream fs = new FileStream("student.xml", FileMode.Open))
             {
                 Student._students = (List<Student>)xmlSerializerStudent.Deserialize(fs);
             }
@@ -35,12 +35,12 @@ namespace Martial_Arts_WPF
                 XmlDictionaryReader reader = XmlDictionaryReader.CreateTextReader(fs, new XmlDictionaryReaderQuotas());
                 Coach.coaches = (List<Coach>)dataContractSerializer.ReadObject(reader, true);
             }
-            using (FileStream fs = new FileStream("martial_art.json", FileMode.OpenOrCreate))
+            using (FileStream fs = new FileStream("martial_art.json", FileMode.Open))
             {
                 MartialArt.martialArts = (List<MartialArt>)jsonSerializer.ReadObject(fs);
             }
             DataContractJsonSerializer jsonArtStudent = new DataContractJsonSerializer(typeof(List<ArtStudent>));
-            using (FileStream fs = new FileStream("art_st.json", FileMode.OpenOrCreate))
+            using (FileStream fs = new FileStream("art_st.json", FileMode.Open))
             {
                 ArtStudent.ArtStudents = (List<ArtStudent>)jsonArtStudent.ReadObject(fs);
             }
@@ -64,7 +64,7 @@ namespace Martial_Arts_WPF
             DataContractSerializer dataContractSerializer = new DataContractSerializer(typeof(List<Coach>));
             DataContractJsonSerializer jsonSerializer = new DataContractJsonSerializer(typeof(List<MartialArt>));
 
-            using (FileStream fs = new FileStream("student.xml", FileMode.OpenOrCreate))
+            using (FileStream fs = new FileStream("student.xml", FileMode.Create))
             {
                 xmlSerializerStudent.Serialize(fs, Student._students);
             }
@@ -81,7 +81,7 @@ namespace Martial_Arts_WPF
 
 
             DataContractJsonSerializer jsonArtStudent = new DataContractJsonSerializer(typeof(List<ArtStudent>));
-            using (FileStream fs = new FileStream("art_st.json", FileMode.OpenOrCreate))
+            using (FileStream fs = new FileStream("art_st.json", FileMode.Create))
             {
                 jsonArtStudent.WriteObject(fs, ArtStudent.ArtStudents);
             }

@@ -25,7 +25,11 @@ namespace Martial_Arts.Data.Relationship
             }
             set
             {
-                _coachID = value.Id;
+                if (value != null)
+                {
+                    _coachID = value.Id;
+                }
+                
             }
         }
 
@@ -48,7 +52,11 @@ namespace Martial_Arts.Data.Relationship
             }
             set
             {
-                _artID = value.Id;
+                if (value != null)
+                {
+                    _artID = value.Id;
+                }
+                
             }
         }
     }

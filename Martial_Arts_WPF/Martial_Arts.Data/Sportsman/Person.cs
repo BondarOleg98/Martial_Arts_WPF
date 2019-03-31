@@ -15,6 +15,8 @@ namespace Martial_Arts.Data
         public string Country { get; set; }
         [DataMember]
         public string Belt { get; set; }
+
+        
         public string SportTitle { get; set; }
 
         [DataMember]

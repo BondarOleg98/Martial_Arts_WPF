@@ -37,6 +37,7 @@ namespace Martial_Arts_WPF.AdditionalWindows
           
             MartialArt.martialArts.Remove(martialArt);
             listMartialArts.Items.Refresh();
+
             Student.Students.Clear();
             listStudent.ItemsSource = Student.Students;
             listStudent.Items.Refresh();

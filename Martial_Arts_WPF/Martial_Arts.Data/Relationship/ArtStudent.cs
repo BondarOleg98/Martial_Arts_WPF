@@ -7,11 +7,12 @@ using Martial_Arts.Data.Structure;
 
 namespace Martial_Arts.Data.Relationship
 {
+    [DataContract]
     public class ArtStudent
     {
         public static List<ArtStudent> ArtStudents = new List<ArtStudent>();
 
-        public static List<MartialArt> _martialArts = new List<MartialArt>();
+        public static List<ArtStudent> _ArtStudents = new List<ArtStudent>();
 
         public ArtStudent()
         {
@@ -20,7 +21,7 @@ namespace Martial_Arts.Data.Relationship
         public Guid _studentID;
         public Guid _artID;
 
-        
+        [DataMember]
         public Student Student
         {
             get
@@ -33,9 +34,13 @@ namespace Martial_Arts.Data.Relationship
             }
             set
             {
-                _studentID = value.Id;
+                if (value != null)
+                {
+                    _studentID = value.Id;
+                }
             }
         }
+        [DataMember]
         public MartialArt MartialArt
         {
             get
@@ -48,7 +53,10 @@ namespace Martial_Arts.Data.Relationship
             }
             set
             {
-                _artID = value.Id;
+                if (value != null)
+                {
+                    _artID = value.Id;
+                }             
             }
         }
     

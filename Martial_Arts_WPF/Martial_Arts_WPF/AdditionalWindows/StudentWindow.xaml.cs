@@ -35,19 +35,9 @@ namespace Martial_Arts_WPF.AdditionalWindows
         private void Button_Remove_Click(object sender, RoutedEventArgs e)
         {
             var student = (Student)listStudent.SelectedItem;
+
             Student._students.Remove(student);
             listStudent.Items.Refresh();
-           
-            ArtStudent artStudent = new ArtStudent();
-            foreach (var item in student.MartialArts)
-            {
-                if(item.Id == student.Id)
-                {
-                    artStudent.MartialArt = item;
-                    artStudent.Student = student;
-                    ArtStudent.ArtStudents.Remove(artStudent);
-                }
-            }
 
             MartialArt._martialArts.Clear();
             listMartialArts.ItemsSource = MartialArt._martialArts;
