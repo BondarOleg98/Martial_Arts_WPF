@@ -7,6 +7,8 @@ using Martial_Arts.Data.Structure;
 using System.Collections.Generic;
 using System.Xml.Serialization;
 using System.IO;
+using System.Data.SqlClient;
+using System.Configuration;
 
 namespace Martial_Arts_WPF.DialogWindows
 {
@@ -38,8 +40,8 @@ namespace Martial_Arts_WPF.DialogWindows
 
         private void Button_Add_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
+            //try
+            //{
 
                 Student student = new Student();
                 ArtStudent artStudent = new ArtStudent();
@@ -62,15 +64,43 @@ namespace Martial_Arts_WPF.DialogWindows
 
                 Student._students.Add(student);
 
+
+                string connetionString = connetionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+               
+                String sql = "Insert into Students (Name,Surname,Age,Belt) " +
+                    "values(N'" + textName.Text + "',N'" +
+                     textSurname.Text + "',N'" + textAge.Text + "',N'" + textBelt.Text + "')";
+                SqlDataAdapter adapter = new SqlDataAdapter();
+                using (SqlConnection con = new SqlConnection(connetionString))
+                {
+                    con.Open();
+                    SqlCommand command = new SqlCommand(sql, con);
+
+                    adapter.InsertCommand = new SqlCommand(sql, con);
+                    adapter.InsertCommand.ExecuteNonQuery();
+
+                    //sql = "SELECT Id FROM Students WHERE Name=2";
+                    //command = new SqlCommand(sql, con);
+                    //SqlDataReader reader = command.ExecuteReader();
+                    ////while (reader.Read())
+                    ////{
+                    ////int id = reader.GetInt32(0);
+                    ////}
+
+                    command.Dispose();
+                    
+                }
+              
+
                 StudentWindow studentWindow = new StudentWindow();
                 this.Close();
                 studentWindow.Show();
-            }
-            catch (Exception)
-            {
+            //}
+            //catch (Exception)
+            //{
 
-                MessageBox.Show("Choose all categories");
-            }
+            //    MessageBox.Show("Choose all categories");
+            //}
         }
 
         private void Button_Edit_Click(object sender, RoutedEventArgs e)

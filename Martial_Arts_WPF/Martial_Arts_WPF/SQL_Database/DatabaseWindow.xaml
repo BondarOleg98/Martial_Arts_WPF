@@ -7,6 +7,8 @@
         mc:Ignorable="d"
         Title="DatabaseWindow" Height="450" Width="800">
     <Grid>
-        
+        <Label Content="Label" HorizontalAlignment="Left" Margin="308,-133,0,0" VerticalAlignment="Top"/>
+        <ListBox x:Name="listStudents" HorizontalAlignment="Left" Height="100" Margin="76,75,0,0" VerticalAlignment="Top" Width="100"/>
+
     </Grid>
 </Window>
