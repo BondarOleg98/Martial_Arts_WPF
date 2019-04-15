@@ -18,6 +18,7 @@ namespace Martial_Arts_WPF.DialogWindows
     public partial class StudentDialogWindow : Window
     {
         private int Id_Student { get; set; }
+        private string sql_edit { get; set; }
 
         public StudentDialogWindow()
         {
@@ -26,13 +27,15 @@ namespace Martial_Arts_WPF.DialogWindows
             listMartialArts.ItemsSource = MartialArt.martialArts;
         }
         public StudentDialogWindow(int student_Id, Student student, Coach coach)
-        {
-           
+        {        
             InitializeComponent();
             textName.Text = student.Name;
             textSurname.Text = student.Surname;
             textAge.Text = student.Age.ToString();
-            textBelt.Text = student.Belt.ToString();
+            textBelt.Text = student.Belt;
+            string sql = "SELECT Id FROM Students WHERE Name='" + student.Name + "' AND Surname='" + textSurname.Text + "' " +
+                "AND Age='" + textAge.Text + "'";
+            sql_edit = sql;
             comboBoxCoaches.ItemsSource = Coach.coaches;
             listMartialArts.ItemsSource = MartialArt.martialArts;
             Id_Student = student_Id;
@@ -49,7 +52,7 @@ namespace Martial_Arts_WPF.DialogWindows
                 student.Surname = textSurname.Text;
                 student.Belt = textBelt.Text;
 
-                student.Age = Convert.ToInt16(textAge.Text);
+                student.Age = Convert.ToInt32(textAge.Text);
                 student.Coach = (Coach)comboBoxCoaches.SelectedItem;
                 if ((MartialArt)listMartialArts.SelectedItem != null)
                 {
@@ -65,17 +68,16 @@ namespace Martial_Arts_WPF.DialogWindows
                 Student._students.Add(student);
 
 
-                string connetionString = connetionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+                string connetionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
                
-                String sql = "Insert into Students (Name,Surname,Age,Belt) " +
-                    "values(N'" + textName.Text + "',N'" +
-                     textSurname.Text + "',N'" + textAge.Text + "',N'" + textBelt.Text + "')";
+                string sql = "Insert into Students (Name,Surname,Age,Belt) " +
+                    "values('" + textName.Text + "','" +
+                     textSurname.Text + "','" + textAge.Text + "','" + textBelt.Text + "')";
                 SqlDataAdapter adapter = new SqlDataAdapter();
                 using (SqlConnection con = new SqlConnection(connetionString))
                 {
                     con.Open();
                     SqlCommand command = new SqlCommand(sql, con);
-
                     adapter.InsertCommand = new SqlCommand(sql, con);
                     adapter.InsertCommand.ExecuteNonQuery();
 
@@ -105,15 +107,42 @@ namespace Martial_Arts_WPF.DialogWindows
 
         private void Button_Edit_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
+            //try
+            //{
                 Student student = new Student();
+
+                string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+            
+                int id = 0;
+                string sql = "";
+                SqlDataAdapter adapter = new SqlDataAdapter();
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+                   
+                    SqlCommand command = new SqlCommand(sql_edit, conn);
+                    SqlDataReader reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        id = reader.GetInt32(0);
+                    }
+                    reader.Close();
+
+                    sql =String.Format("UPDATE Students SET Age = ('" + textAge.Text + "'), Name = ('" + textName.Text + "')," +
+                        "Surname=('" + textSurname.Text + "'), Belt=('" + textBelt.Text + "') WHERE Id={0}",id);
+                    command = new SqlCommand(sql, conn);
+                    adapter.UpdateCommand = new SqlCommand(sql, conn);
+                    adapter.UpdateCommand.ExecuteNonQuery();
+
+                    command.Dispose();
+
+                }
                 ArtStudent artStudent = new ArtStudent();
                 student.Name = textName.Text;
                 student.Surname = textSurname.Text;
                 student.Belt = textBelt.Text;
 
-                student.Age = Convert.ToInt16(textAge.Text);
+                student.Age = Convert.ToInt32(textAge.Text);
                 student.Coach = (Coach)comboBoxCoaches.SelectedItem;
                 if ((MartialArt)listMartialArts.SelectedItem == null)
                 {
@@ -133,16 +162,17 @@ namespace Martial_Arts_WPF.DialogWindows
                 
                 Student._students.RemoveAt(Id_Student);
                 Student._students.Insert(Id_Student, student);
-              
+
+               
                 StudentWindow studentWindow = new StudentWindow();            
                 studentWindow.Show();
                 this.Close();
-            }
-            catch (Exception)
-            {
+            //}
+            //catch (Exception)
+            //{
 
-                MessageBox.Show("Choose right categories");
-            }
+            //    MessageBox.Show("Choose right categories");
+            //}
         }
 
         private void Button_Cancel_Click(object sender, RoutedEventArgs e)
