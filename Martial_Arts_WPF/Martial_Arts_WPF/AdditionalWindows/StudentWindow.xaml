@@ -14,16 +14,6 @@
         <Button Content="Add" HorizontalAlignment="Left" Margin="405,34,0,0" VerticalAlignment="Top" Width="76" Click="Button_Add_Click" Height="20" Grid.Column="1"/>
         <Button Content="Remove" HorizontalAlignment="Left" Margin="405,74,0,0" VerticalAlignment="Top" Width="76" Click="Button_Remove_Click" Height="20" Grid.Column="1"/>
         <Button Content="Edit" HorizontalAlignment="Left" Margin="405,114,0,0" VerticalAlignment="Top" Width="76" Click="Button_Edit_Click" Height="20" Grid.Column="1"/>
-        <ListView x:Name="listStudent" HorizontalAlignment="Left" Height="250" Margin="0,34,0,0" VerticalAlignment="Top" Width="254" Grid.Column="1">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn DisplayMemberBinding="{Binding Name}" Width="60" Header="Name"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding Surname}" Width="100" Header="Surname"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding Age}" Width="40" Header="Age"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding Belt}" Width="50" Header="Belt"/>
-                </GridView>
-            </ListView.View>
-        </ListView>
         <Button Content="Cancel" Grid.Column="1" HorizontalAlignment="Left" Margin="443,264,0,0" VerticalAlignment="Top" Width="47" Height="20" Click="Button_Cancel_Click"/>
         <Label Content="Student" Grid.Column="1" HorizontalAlignment="Left" Margin="100,5,0,0" VerticalAlignment="Top" RenderTransformOrigin="-2.974,0.115"/>
         <ListView x:Name="listMartialArts" Grid.Column="1" HorizontalAlignment="Left" Height="100" Margin="276,34,0,0" VerticalAlignment="Top" Width="106">
@@ -36,6 +26,7 @@
         </ListView>
         <Label Content="Martial arts" Grid.Column="1" HorizontalAlignment="Left" Margin="293,5,0,0" VerticalAlignment="Top"/>
         <Button Content="Show arts" Grid.Column="1" HorizontalAlignment="Left" Margin="276,155,0,0" VerticalAlignment="Top" Width="106" RenderTransformOrigin="0.273,-0.45" Click="Button_Show_Click"/>
+        <DataGrid Grid.Column="1" HorizontalAlignment="Left" Height="170" Margin="10,36,0,0" VerticalAlignment="Top" Width="237" SelectionChanged="DataGrid_SelectionChanged"/>
 
 
 

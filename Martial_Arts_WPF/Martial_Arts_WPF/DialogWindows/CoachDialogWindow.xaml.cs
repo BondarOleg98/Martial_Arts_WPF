@@ -23,7 +23,7 @@ namespace Martial_Arts_WPF.DialogWindows
             textName.Text = coach.Name;
             textSurname.Text = coach.Surname;
             textAge.Text = coach.Age.ToString();
-            textBelt.Text = coach.Belt.ToString();
+            textBelt.Text = coach.Belt;
 
             Id_Coach = coach_Id;
         }
@@ -36,25 +36,39 @@ namespace Martial_Arts_WPF.DialogWindows
         {
             try
             {
-                Coach coach = new Coach(textName.Text, textSurname.Text, textBelt.Text, Convert.ToInt16(textAge.Text));
+                //Coach coach = new Coach(textName.Text, textSurname.Text, textBelt.Text, Convert.ToInt16(textAge.Text));
               
                 if ((Convert.ToInt16(textAge.Text)).GetType() == typeof(int))
                 {
                     throw new Exception("Error");
                 }
-                Coach.coaches.Add(coach);
+                //Coach.coaches.Add(coach);
                 CoachWindow coachWindow = new CoachWindow();            
-
                 StudentWindow studentWindow = new StudentWindow();
 
-                string stringConnection = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Oleg\Documents\martial_artDB.mdf;Integrated Security=True;Connect Timeout=30";
-        
-                string sqlExpression = "INSERT INTO Coach (Name, Age) VALUES ('Tom', 18)";
-                using (SqlConnection connection = new SqlConnection(stringConnection))
+                string connetionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+
+                string sql = "Insert into Coach (Name,Surname,Age,Belt) " +
+                   "values('" + textName.Text + "','" +
+                    textSurname.Text + "','" + textAge.Text + "','" + textBelt.Text + "')";
+                SqlDataAdapter adapter = new SqlDataAdapter();
+                using (SqlConnection con = new SqlConnection(connetionString))
                 {
-                    connection.Open();
-                    SqlCommand command = new SqlCommand(sqlExpression,connection);
-                   
+                    con.Open();
+                    SqlCommand command = new SqlCommand(sql, con);
+                    adapter.InsertCommand = new SqlCommand(sql, con);
+                    adapter.InsertCommand.ExecuteNonQuery();
+
+                    //sql = "SELECT Id FROM Students WHERE Name=2";
+                    //command = new SqlCommand(sql, con);
+                    //SqlDataReader reader = command.ExecuteReader();
+                    ////while (reader.Read())
+                    ////{
+                    ////int id = reader.GetInt32(0);
+                    ////}
+
+                    command.Dispose();
+
                 }
 
 
@@ -72,14 +86,14 @@ namespace Martial_Arts_WPF.DialogWindows
         {
             try
             {
-                Coach coach = new Coach(textName.Text, textSurname.Text, textBelt.Text, Convert.ToInt16(textAge.Text));
+                //Coach coach = new Coach(textName.Text, textSurname.Text, textBelt.Text, Convert.ToInt16(textAge.Text));
 
                 if ((Convert.ToInt16(textAge.Text)).GetType() == typeof(int))
                 {
                     throw new Exception("Error 404: ");
                 }
-                Coach.coaches.RemoveAt(Id_Coach);
-                Coach.coaches.Insert(Id_Coach, coach);
+                //Coach.coaches.RemoveAt(Id_Coach);
+                //Coach.coaches.Insert(Id_Coach, coach);
                 CoachWindow coachWindow = new CoachWindow();
                 this.Close();
                 coachWindow.Show();

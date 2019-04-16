@@ -7,6 +7,8 @@ using System.Xml.Serialization;
 using System.IO;
 using System.Collections.Generic;
 using System.Runtime.Serialization.Json;
+using System.Data.SqlClient;
+using System.Configuration;
 
 namespace Martial_Arts_WPF.AdditionalWindows
 {
@@ -35,9 +37,19 @@ namespace Martial_Arts_WPF.AdditionalWindows
         private void Button_Remove_Click(object sender, RoutedEventArgs e)
         {
             var student = (Student)listStudent.SelectedItem;
+            
+            string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+            string sql = "DELETE FROM Students WHERE Name='"+student.Name+"' AND Surname='"+student.Surname+"' AND " +
+                "Age='"+student.Age+"' AND Belt='"+student.Belt+"'";
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+                SqlCommand command = new SqlCommand(sql, conn);
+                command.ExecuteNonQuery();
+            }
 
-            Student._students.Remove(student);
-            listStudent.Items.Refresh();
+            //Student._students.Remove(student);
+            //listStudent.Items.Refresh();
 
             MartialArt._martialArts.Clear();
             listMartialArts.ItemsSource = MartialArt._martialArts;
@@ -72,23 +84,24 @@ namespace Martial_Arts_WPF.AdditionalWindows
 
         private void Button_Show_Click(object sender, RoutedEventArgs e)
         {
-            MartialArt._martialArts.Clear();
-            listMartialArts.ItemsSource = MartialArt._martialArts;
-            listMartialArts.Items.Refresh();
-            Student Students = (Student)listStudent.SelectedItem;
-            if (Students != null)
-            {
-                foreach (MartialArt item in Students.MartialArts)
-                {
-                    if (item != null)
-                    {
-                        MartialArt._martialArts.Add(item);
-                        listMartialArts.ItemsSource = MartialArt._martialArts;
-                        listMartialArts.Items.Refresh();
-                    }
+            //MartialArt._martialArts.Clear();
+            //listMartialArts.ItemsSource = MartialArt._martialArts;
+            //listMartialArts.Items.Refresh();
+            //Student Students = (Student)listStudent.SelectedItem;
+            //if (Students != null)
+            //{
+            //    foreach (MartialArt item in Students.MartialArts)
+            //    {
+            //        if (item != null)
+            //        {
+            //            MartialArt._martialArts.Add(item);
+            //            listMartialArts.ItemsSource = MartialArt._martialArts;
+            //            listMartialArts.Items.Refresh();
+            //        }
 
-                }
-            }
+            //    }
+            //}
+
            
 
         }
