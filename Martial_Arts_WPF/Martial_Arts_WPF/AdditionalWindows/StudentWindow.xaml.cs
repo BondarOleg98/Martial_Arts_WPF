@@ -9,6 +9,8 @@ using System.Collections.Generic;
 using System.Runtime.Serialization.Json;
 using System.Data.SqlClient;
 using System.Configuration;
+using System.Data.Linq;
+using Martial_Arts.Data;
 
 namespace Martial_Arts_WPF.AdditionalWindows
 {
@@ -20,8 +22,11 @@ namespace Martial_Arts_WPF.AdditionalWindows
         public StudentWindow()
         {
             InitializeComponent();
-            listStudent.ItemsSource = Student._students;
-            listStudent.Items.Refresh();
+            string connetionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+            DataContext db = new DataContext(connetionString);
+
+            Table<Person> students = db.GetTable<Person>();
+            //listStudent.ItemsSource = students;
         }
 
         private void Button_Add_Click(object sender, RoutedEventArgs e)
@@ -84,25 +89,11 @@ namespace Martial_Arts_WPF.AdditionalWindows
 
         private void Button_Show_Click(object sender, RoutedEventArgs e)
         {
-            //MartialArt._martialArts.Clear();
-            //listMartialArts.ItemsSource = MartialArt._martialArts;
-            //listMartialArts.Items.Refresh();
-            //Student Students = (Student)listStudent.SelectedItem;
-            //if (Students != null)
-            //{
-            //    foreach (MartialArt item in Students.MartialArts)
-            //    {
-            //        if (item != null)
-            //        {
-            //            MartialArt._martialArts.Add(item);
-            //            listMartialArts.ItemsSource = MartialArt._martialArts;
-            //            listMartialArts.Items.Refresh();
-            //        }
 
-            //    }
-            //}
+        }
 
-           
+        private void DataGrid_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
 
         }
     }

@@ -1,13 +1,9 @@
-﻿using System.Linq;
-using System.Windows;
-using Martial_Arts.Data.Sportsman;
+﻿using System.Windows;
 using Martial_Arts_WPF.DialogWindows;
-using Martial_Arts.Data;
-using System.Xml.Serialization;
-using System.Collections.Generic;
-using System.IO;
 using System.Configuration;
 using System.Data.SqlClient;
+using System.Data;
+using Martial_Arts.Data.Sportsman;
 using System;
 
 namespace Martial_Arts_WPF.AdditionalWindows
@@ -21,32 +17,19 @@ namespace Martial_Arts_WPF.AdditionalWindows
         {
 
             InitializeComponent();
-            //listCoach.ItemsSource = Coach.coaches;
-            //listCoach.Items.Refresh();
+
             string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
-
-            string sqlExpression = "SELECT * FROM Coach";
+            string sql = "SELECT Name,Surname,Age,Belt FROM Coach";
             using (SqlConnection conn = new SqlConnection(connectionString))
-            {
+            {               
                 conn.Open();
-                SqlCommand command = new SqlCommand(sqlExpression, conn);
-                SqlDataReader reader = command.ExecuteReader();
-
-                if (reader.HasRows)
-                {
-                    while (reader.Read())
-                    {
-                        object name = reader.GetValue(1);
-                        object surname = reader.GetValue(2);
-                        listCoach.Items.Add(surname.ToString());
-                      
-                    }
-                }
-
-                reader.Close();
+                SqlCommand command = new SqlCommand(sql, conn);
+                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(command);
+                DataTable data = new DataTable("Coach");
+                sqlDataAdapter.Fill(data);
+                listCoach.ItemsSource = data.DefaultView;
             }
         }
-
 
         private void Button_Add_Click(object sender, RoutedEventArgs e)
         {
@@ -61,48 +44,55 @@ namespace Martial_Arts_WPF.AdditionalWindows
         {
             try
             {
-                var coach = (Coach)listCoach.SelectedItem;
+                DataRowView dataRow = listCoach.SelectedItem as DataRowView;
+                string name = dataRow.Row["Name"].ToString();
+                string surname = dataRow.Row["Surname"].ToString();
+                string age = dataRow.Row["Age"].ToString();
+                string belt = dataRow.Row["Belt"].ToString();
 
                 string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
 
-                string sql = "DELETE FROM Coach WHERE Name='" + coach.Name + "' AND Surname='" + coach.Surname + "' AND " +
-                    "Age='" + coach.Age + "' AND Belt='" + coach.Belt + "'";
+                string sql = "DELETE FROM Coach WHERE Name='" + name + "' AND Surname='"+surname+"' " +
+                    "AND Age='"+age+"' AND Belt='"+belt+"'";
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     conn.Open();
                     SqlCommand command = new SqlCommand(sql, conn);
                     command.ExecuteNonQuery();
-                }
+                    SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(command);
+                    listCoach.ItemsSource = null;
 
-                //Coach.coaches.Remove(coach);
-                //listCoach.Items.Refresh();
-                //Coach.students.Clear();
-                //listStudents.ItemsSource = Coach.students;
-                //listStudents.Items.Refresh();
-            }          
+                    DataTable data = new DataTable("Coach");
+                    sql = "SELECT Name, Surname, Age, Belt FROM Coach";
+                    command = new SqlCommand(sql, conn);
+                 
+                    sqlDataAdapter = new SqlDataAdapter(command);
+                    
+                    sqlDataAdapter.Fill(data);
+                    listCoach.ItemsSource = data.DefaultView;
+                }
+            }
             catch (Exception)
             {
 
-                MessageBox.Show("Delete a student at first");
+                MessageBox.Show("Don't have coaches");
             }
-
         }
 
         private void Button_Edit_Click(object sender, RoutedEventArgs e)
         {
-            int coach_Id = listCoach.SelectedIndex;
-            var coach = (Coach)listCoach.SelectedItem;
-            if (coach_Id ==-1 )
+            DataRowView dataRow = listCoach.SelectedItem as DataRowView;
+            if (dataRow == null)
             {
                 MessageBox.Show("Choose a coach");
             }
             else
-            {
-                CoachDialogWindow coachDialogWindow = new CoachDialogWindow(coach_Id, coach);
+            {            
+                CoachDialogWindow coachDialogWindow = new CoachDialogWindow(dataRow);
                 coachDialogWindow.bt_Add.IsEnabled = false;
                 this.Close();
                 coachDialogWindow.Show();
-            }    
+            }
         }
 
         private void Button_Cancel_Click(object sender, RoutedEventArgs e)
@@ -115,42 +105,9 @@ namespace Martial_Arts_WPF.AdditionalWindows
 
         private void Button_Show_Click(object sender, RoutedEventArgs e)
         {
-            //Coach.students.Clear();
-            //listStudents.ItemsSource = Coach.students;
-            //listStudents.Items.Refresh();
-            //var Coaches = (Coach)listCoach.SelectedItem;
-            //foreach (var item in Student._students)
-            //{
-            //    if(item._coachId == Coaches.Id)
-            //    {
-            //        Coach.students.Add(item);
-            //        listStudents.ItemsSource = Coach.students;
-            //        listStudents.Items.Refresh();
-            //    }
-                   
-            //}
-            string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
-
-            string sqlExpression = "SELECT * FROM Students";
-            using (SqlConnection conn = new SqlConnection(connectionString))
-            {
-                conn.Open();
-                SqlCommand command = new SqlCommand(sqlExpression, conn);
-                SqlDataReader reader = command.ExecuteReader();
-
-                if (reader.HasRows)
-                {
-                    while (reader.Read())
-                    {
-                        object name = reader.GetValue(1);
-                        object surname = reader.GetValue(2);
-
-                        listStudents.Items.Add(surname);
-                    }
-                }
-
-                reader.Close();
-            }
+          
         }
+
+        
     }
 }

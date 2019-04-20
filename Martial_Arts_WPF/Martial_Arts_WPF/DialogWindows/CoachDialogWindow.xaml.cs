@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data;
 using System.Data.SqlClient;
 using System.IO;
 using System.Windows;
@@ -17,15 +18,17 @@ namespace Martial_Arts_WPF.DialogWindows
     {
         private int Id_Coach { get; set; }
 
-        public CoachDialogWindow(int coach_Id, Coach coach)
+        public CoachDialogWindow(DataRowView dataRow)
         {
             InitializeComponent();
-            textName.Text = coach.Name;
-            textSurname.Text = coach.Surname;
-            textAge.Text = coach.Age.ToString();
-            textBelt.Text = coach.Belt;
-
-            Id_Coach = coach_Id;
+            string name = dataRow.Row["Name"].ToString();
+            string surname = dataRow.Row["Surname"].ToString();
+            string age = dataRow.Row["Age"].ToString();
+            string belt = dataRow.Row["Belt"].ToString();
+            textName.Text = name;
+            textSurname.Text = surname;
+            textAge.Text = age;
+            textBelt.Text = belt;
         }
         public CoachDialogWindow()
         {
@@ -36,16 +39,8 @@ namespace Martial_Arts_WPF.DialogWindows
         {
             try
             {
-                //Coach coach = new Coach(textName.Text, textSurname.Text, textBelt.Text, Convert.ToInt16(textAge.Text));
-              
-                if ((Convert.ToInt16(textAge.Text)).GetType() == typeof(int))
-                {
-                    throw new Exception("Error");
-                }
-                //Coach.coaches.Add(coach);
-                CoachWindow coachWindow = new CoachWindow();            
-                StudentWindow studentWindow = new StudentWindow();
-
+                Convert.ToInt32(textAge.Text).GetType();
+               
                 string connetionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
 
                 string sql = "Insert into Coach (Name,Surname,Age,Belt) " +
@@ -58,27 +53,17 @@ namespace Martial_Arts_WPF.DialogWindows
                     SqlCommand command = new SqlCommand(sql, con);
                     adapter.InsertCommand = new SqlCommand(sql, con);
                     adapter.InsertCommand.ExecuteNonQuery();
-
-                    //sql = "SELECT Id FROM Students WHERE Name=2";
-                    //command = new SqlCommand(sql, con);
-                    //SqlDataReader reader = command.ExecuteReader();
-                    ////while (reader.Read())
-                    ////{
-                    ////int id = reader.GetInt32(0);
-                    ////}
-
-                    command.Dispose();
-
                 }
 
-
+                CoachWindow coachWindow = new CoachWindow();
                 this.Close();
+                
                 coachWindow.Show();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("Error in a field age");
             }
             
         }
@@ -86,22 +71,29 @@ namespace Martial_Arts_WPF.DialogWindows
         {
             try
             {
-                //Coach coach = new Coach(textName.Text, textSurname.Text, textBelt.Text, Convert.ToInt16(textAge.Text));
+                Convert.ToInt32(textAge.Text).GetType();
+   
+                string connetionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
 
-                if ((Convert.ToInt16(textAge.Text)).GetType() == typeof(int))
+                string sql = "Update Coach Set " +
+               "Name='" + textName.Text + "', Surname='" + textSurname.Text + "', Age='" + textAge.Text + "', Belt='" + textBelt.Text + "'";
+
+
+                SqlDataAdapter adapter = new SqlDataAdapter();
+                using (SqlConnection con = new SqlConnection(connetionString))
                 {
-                    throw new Exception("Error 404: ");
+                    con.Open();
+                    SqlCommand command = new SqlCommand(sql, con);
+                    adapter.UpdateCommand = new SqlCommand(sql, con);
+                    adapter.UpdateCommand.ExecuteNonQuery();
                 }
-                //Coach.coaches.RemoveAt(Id_Coach);
-                //Coach.coaches.Insert(Id_Coach, coach);
                 CoachWindow coachWindow = new CoachWindow();
                 this.Close();
                 coachWindow.Show();
             }
             catch (Exception)
             {
-
-                MessageBox.Show("Invalid age");
+                MessageBox.Show("Error in a field age");
             }
         }
 

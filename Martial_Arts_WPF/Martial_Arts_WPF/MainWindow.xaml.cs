@@ -22,28 +22,28 @@ namespace Martial_Arts_WPF
         public MainWindow()
         {
             InitializeComponent();
-            XmlSerializer xmlSerializerStudent = new XmlSerializer(typeof(List<Student>));
-            DataContractSerializer dataContractSerializer = new DataContractSerializer(typeof(List<Coach>));
-            DataContractJsonSerializer jsonSerializer = new DataContractJsonSerializer(typeof(List<MartialArt>));
+            //XmlSerializer xmlSerializerStudent = new XmlSerializer(typeof(List<Student>));
+            //DataContractSerializer dataContractSerializer = new DataContractSerializer(typeof(List<Coach>));
+            //DataContractJsonSerializer jsonSerializer = new DataContractJsonSerializer(typeof(List<MartialArt>));
 
-            using (FileStream fs = new FileStream("student.xml", FileMode.Open))
-            {
-                Student._students = (List<Student>)xmlSerializerStudent.Deserialize(fs);
-            }
-            using (FileStream fs = new FileStream("coach.xml", FileMode.Open))
-            {
-                XmlDictionaryReader reader = XmlDictionaryReader.CreateTextReader(fs, new XmlDictionaryReaderQuotas());
-                Coach.coaches = (List<Coach>)dataContractSerializer.ReadObject(reader, true);
-            }
-            using (FileStream fs = new FileStream("martial_art.json", FileMode.Open))
-            {
-                MartialArt.martialArts = (List<MartialArt>)jsonSerializer.ReadObject(fs);
-            }
-            DataContractJsonSerializer jsonArtStudent = new DataContractJsonSerializer(typeof(List<ArtStudent>));
-            using (FileStream fs = new FileStream("art_st.json", FileMode.Open))
-            {
-                ArtStudent.ArtStudents = (List<ArtStudent>)jsonArtStudent.ReadObject(fs);
-            }
+            //using (FileStream fs = new FileStream("student.xml", FileMode.Open))
+            //{
+            //    Student._students = (List<Student>)xmlSerializerStudent.Deserialize(fs);
+            //}
+            //using (FileStream fs = new FileStream("coach.xml", FileMode.Open))
+            //{
+            //    XmlDictionaryReader reader = XmlDictionaryReader.CreateTextReader(fs, new XmlDictionaryReaderQuotas());
+            //    Coach.coaches = (List<Coach>)dataContractSerializer.ReadObject(reader, true);
+            //}
+            //using (FileStream fs = new FileStream("martial_art.json", FileMode.Open))
+            //{
+            //    MartialArt.martialArts = (List<MartialArt>)jsonSerializer.ReadObject(fs);
+            //}
+            //DataContractJsonSerializer jsonArtStudent = new DataContractJsonSerializer(typeof(List<ArtStudent>));
+            //using (FileStream fs = new FileStream("art_st.json", FileMode.Open))
+            //{
+            //    ArtStudent.ArtStudents = (List<ArtStudent>)jsonArtStudent.ReadObject(fs);
+            //}
 
         }
         public MainWindow(int flag)

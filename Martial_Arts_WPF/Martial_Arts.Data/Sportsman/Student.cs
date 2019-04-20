@@ -4,6 +4,7 @@ using Martial_Arts.Data.Relationship;
 using System;
 using System.Xml.Serialization;
 using System.Runtime.Serialization;
+using System.Data.Linq.Mapping;
 
 namespace Martial_Arts.Data.Sportsman
 {

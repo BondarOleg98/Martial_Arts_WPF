@@ -1,5 +1,6 @@
 ﻿using Martial_Arts.Data.Sportsman;
 using System;
+using System.Data.Linq.Mapping;
 using System.Runtime.Serialization;
 
 namespace Martial_Arts.Data
@@ -7,28 +8,37 @@ namespace Martial_Arts.Data
     [DataContract]
     [KnownType(typeof(Student))]
     [KnownType(typeof(Coach))]
+    [Table]
+    [InheritanceMapping(Code = "S", Type = typeof(Student),
+    IsDefault = true)]
     public class Person : Base
     {
+        [Column(IsDiscriminator = true)]
+        public string DiscKey;
+
         [DataMember]
         private int age;
        
         public string Country { get; set; }
-        [DataMember]
+        [DataMember]   
+        [Column]
         public string Belt { get; set; }
 
-        
         public string SportTitle { get; set; }
 
         [DataMember]
+        [Column]
         public string Name { get; set; }
 
         [DataMember]
+        [Column]
         public string Surname { get; set; }
 
         public Person()
         {
 
         }
+        [Column]
         public int Age
         {
             get { return age; }

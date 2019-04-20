@@ -9,6 +9,7 @@ using System.Xml.Serialization;
 using System.IO;
 using System.Data.SqlClient;
 using System.Configuration;
+using System.Data.Linq;
 
 namespace Martial_Arts_WPF.DialogWindows
 {
@@ -23,32 +24,7 @@ namespace Martial_Arts_WPF.DialogWindows
         public StudentDialogWindow()
         {
             InitializeComponent();
-            //comboBoxCoaches.ItemsSource = Coach.coaches;
-            listMartialArts.ItemsSource = MartialArt.martialArts;
-
-            string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
-
-            string sqlExpression = "SELECT * FROM Coach";
-            using (SqlConnection conn = new SqlConnection(connectionString))
-            {
-                conn.Open();
-                SqlCommand command = new SqlCommand(sqlExpression, conn);
-                SqlDataReader reader = command.ExecuteReader();
-
-                if (reader.HasRows) 
-                {
-                    while (reader.Read())
-                    {
-                        object name = reader.GetValue(1);
-                        object surname = reader.GetValue(2);
-
-                        
-                        comboBoxCoaches.Items.Add(surname);
-                    }
-                }
-
-                reader.Close();
-            }
+;
         }
         public StudentDialogWindow(int student_Id, Student student, Coach coach)
         {        
@@ -62,97 +38,84 @@ namespace Martial_Arts_WPF.DialogWindows
             sql_edit = sql;
             //comboBoxCoaches.ItemsSource = Coach.coaches;
             listMartialArts.ItemsSource = MartialArt.martialArts;
-            Id_Student = student_Id;
-            string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
-
-            string sqlExpression = "SELECT * FROM Coach";
-            using (SqlConnection conn = new SqlConnection(connectionString))
-            {
-                conn.Open();
-                SqlCommand command = new SqlCommand(sqlExpression, conn);
-                SqlDataReader reader = command.ExecuteReader();
-
-                if (reader.HasRows)
-                {
-                    while (reader.Read())
-                    {
-                        object name = reader.GetValue(1);
-                        object surname = reader.GetValue(2);
-
-
-                        comboBoxCoaches.Items.Add(surname);
-                    }
-                }
-
-                reader.Close();
-            }
         }
 
         private void Button_Add_Click(object sender, RoutedEventArgs e)
         {
-            try
+            string connetionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+            DataContext db = new DataContext(connetionString);
+            Student student = new Student
             {
+                Name = textName.Text,
+                Surname = textSurname.Text,
+                Age = Convert.ToInt32(textAge.Text),
+                Belt = textBelt.Text
+            };
+            db.GetTable<Student>().InsertOnSubmit(student);
+            db.SubmitChanges();
+            //try
+            //{
 
-                Student student = new Student();
-                ArtStudent artStudent = new ArtStudent();
-                student.Name = textName.Text;
-                student.Surname = textSurname.Text;
-                student.Belt = textBelt.Text;
+            //    Student student = new Student();
+            //    ArtStudent artStudent = new ArtStudent();
+            //    student.Name = textName.Text;
+            //    student.Surname = textSurname.Text;
+            //    student.Belt = textBelt.Text;
 
-                student.Age = Convert.ToInt32(textAge.Text);
-              
-                var coach_surname = comboBoxCoaches.SelectedItem;
-                if ((MartialArt)listMartialArts.SelectedItem != null)
-                {
-                    artStudent.MartialArt = (MartialArt)listMartialArts.SelectedItem;
-                    artStudent.Student = student;
-                    ArtStudent.ArtStudents.Add(artStudent);
-                }
-                //if (comboBoxCoaches.SelectedItem == null)
-                //{
-                //    MessageBox.Show("Choose a coach");
-                //}
+            //    student.Age = Convert.ToInt32(textAge.Text);
 
-                Student._students.Add(student);
-                string sql = "";
-                string connetionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
-               
-                SqlDataAdapter adapter = new SqlDataAdapter();
-                int id = 0;
-                using (SqlConnection con = new SqlConnection(connetionString))
-                {
-                    con.Open();
-                    SqlCommand command = new SqlCommand(sql, con);
+            //    var coach_surname = comboBoxCoaches.SelectedItem;
+            //    if ((MartialArt)listMartialArts.SelectedItem != null)
+            //    {
+            //        artStudent.MartialArt = (MartialArt)listMartialArts.SelectedItem;
+            //        artStudent.Student = student;
+            //        ArtStudent.ArtStudents.Add(artStudent);
+            //    }
+            //    if (comboBoxCoaches.SelectedItem == null)
+            //    {
+            //        MessageBox.Show("Choose a coach");
+            //    }
+
+            //    Student._students.Add(student);
+            //    string sql = "";
+            //    string connetionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+
+            //    SqlDataAdapter adapter = new SqlDataAdapter();
+            //    int id = 0;
+            //    using (SqlConnection con = new SqlConnection(connetionString))
+            //    {
+            //        con.Open();
+            //        SqlCommand command = new SqlCommand(sql, con);
 
 
-                    sql = "SELECT Pk_Coach_Id FROM Coach WHERE  Surname='" + coach_surname + "' ";
-                    
-                    command = new SqlCommand(sql, con);
-                    SqlDataReader reader = command.ExecuteReader();
-                    while (reader.Read())
-                    {
-                        id = reader.GetInt32(0);
-                    }
-                    reader.Close();
-                    sql = "Insert into Students (Name,Surname,Age,Belt,Fk_Coach_Id) " +
-                    "values('" + textName.Text + "','" +
-                    textSurname.Text + "','" + textAge.Text + "','" + textBelt.Text + "','"+ id +"')";
+            //        sql = "SELECT Pk_Coach_Id FROM Coach WHERE  Surname='" + coach_surname + "' ";
 
-                    adapter.InsertCommand = new SqlCommand(sql, con);
-                    adapter.InsertCommand.ExecuteNonQuery();
-                    command.Dispose();
-                    
-                }
-              
+            //        command = new SqlCommand(sql, con);
+            //        SqlDataReader reader = command.ExecuteReader();
+            //        while (reader.Read())
+            //        {
+            //            id = reader.GetInt32(0);
+            //        }
+            //        reader.Close();
+            //        sql = "Insert into Students (Name,Surname,Age,Belt,Fk_Coach_Id) " +
+            //        "values('" + textName.Text + "','" +
+            //        textSurname.Text + "','" + textAge.Text + "','" + textBelt.Text + "','" + id + "')";
+
+            //        adapter.InsertCommand = new SqlCommand(sql, con);
+            //        adapter.InsertCommand.ExecuteNonQuery();
+            //        command.Dispose();
+
+            //    }
+
 
                 StudentWindow studentWindow = new StudentWindow();
                 this.Close();
                 studentWindow.Show();
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("Choose all categories");
-            }
+            //}
+            //catch (Exception)
+            //{
+            //    MessageBox.Show("Choose all categories");
+            //}
         }
 
         private void Button_Edit_Click(object sender, RoutedEventArgs e)

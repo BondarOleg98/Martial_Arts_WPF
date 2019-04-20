@@ -15,16 +15,6 @@
         <Button Content="Add" HorizontalAlignment="Left" Margin="422,47,0,0" VerticalAlignment="Top" Width="76" Click="Button_Add_Click" Height="20" Grid.Column="1"/>
         <Button Content="Remove" HorizontalAlignment="Left" Margin="422,98,0,0" VerticalAlignment="Top" Width="76" Click="Button_Remove_Click" Height="20" Grid.Column="1"/>
         <Button Content="Edit" HorizontalAlignment="Left" Margin="422,144,0,0" VerticalAlignment="Top" Width="76" Click="Button_Edit_Click" Height="20" Grid.Column="1" RenderTransformOrigin="1.796,0.55"/>
-        <ListView x:Name="listCoach" HorizontalAlignment="Left" Height="250" Margin="0,36,0,0" VerticalAlignment="Top" Width="254" Grid.Column="1">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn DisplayMemberBinding="{Binding Name}" Width="60" Header="Name"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding Surname}" Width="100" Header="Surname"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding Age}" Width="40" Header="Age"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding Belt}" Width="50" Header="Belt"/>
-                </GridView>
-            </ListView.View>
-        </ListView>
         <Button Content="Cancel" Grid.Column="1" HorizontalAlignment="Left" Margin="462,273,0,0" VerticalAlignment="Top" Width="50" Height="21" Click="Button_Cancel_Click" RenderTransformOrigin="1.667,0.905"/>
         <Label Content="Students" Grid.Column="1" HorizontalAlignment="Left" Margin="308,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="0,-0.231"/>
         <Button Content="Show students" Grid.Column="1" HorizontalAlignment="Left" Margin="286,159,0,0" VerticalAlignment="Top" Width="100" RenderTransformOrigin="0.273,-0.45" Click="Button_Show_Click"/>
@@ -37,7 +27,7 @@
             </ListView.View>
         </ListView>
         <Label Content="Coaches" Grid.Column="1" HorizontalAlignment="Left" Margin="102,10,0,0" VerticalAlignment="Top"/>
-
+        <DataGrid x:Name="listCoach" AutoGenerateColumns="True" Grid.Column="1" HorizontalAlignment="Left" Height="225" Margin="10,37,0,0" VerticalAlignment="Top" Width="239" IsReadOnly="True"/>
 
 
     </Grid>
