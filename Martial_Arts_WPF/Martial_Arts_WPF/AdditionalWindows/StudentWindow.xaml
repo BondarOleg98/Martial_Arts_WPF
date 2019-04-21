@@ -26,7 +26,14 @@
         </ListView>
         <Label Content="Martial arts" Grid.Column="1" HorizontalAlignment="Left" Margin="293,5,0,0" VerticalAlignment="Top"/>
         <Button Content="Show arts" Grid.Column="1" HorizontalAlignment="Left" Margin="276,155,0,0" VerticalAlignment="Top" Width="106" RenderTransformOrigin="0.273,-0.45" Click="Button_Show_Click"/>
-        <DataGrid x:Name="listStudent" Grid.Column="1" HorizontalAlignment="Left" Height="170" Margin="10,36,0,0" VerticalAlignment="Top" Width="237" SelectionChanged="DataGrid_SelectionChanged" IsReadOnly="True"/>
+        <DataGrid x:Name="listStudent" Grid.Column="1" HorizontalAlignment="Left" Height="170" Margin="10,36,0,0" VerticalAlignment="Top" Width="226" SelectionChanged="DataGrid_SelectionChanged" IsReadOnly="True" GridLinesVisibility="None" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Name" Binding="{Binding Path=Name}" Width="50" />
+                <DataGridTextColumn Header="Surname" Binding="{Binding Path=Surname}" Width="80" />
+                <DataGridTextColumn Header="Age" Binding="{Binding Path=Age}" Width="50" />
+                <DataGridTextColumn Header="Belt" Binding="{Binding Path=Belt}" Width="50" />
+            </DataGrid.Columns>
+        </DataGrid>
     
 
 

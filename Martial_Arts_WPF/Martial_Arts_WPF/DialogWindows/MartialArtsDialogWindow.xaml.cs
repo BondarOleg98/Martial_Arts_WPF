@@ -36,17 +36,17 @@ namespace Martial_Arts_WPF.DialogWindows
             try
             {
 
-                MartialArt martialArt = new MartialArt();
-                ArtStudent artStudent = new ArtStudent();
-                martialArt.Name = textName.Text;
-                if ((Student)listStudents.SelectedItem != null)
-                {
-                    artStudent.Student = (Student)listStudents.SelectedItem;
-                    artStudent.MartialArt = martialArt;
-                    ArtStudent.ArtStudents.Add(artStudent);
-                }
+                //MartialArt martialArt = new MartialArt();
+                //ArtStudent artStudent = new ArtStudent();
+                //martialArt.Name = textName.Text;
+                //if ((Student)listStudents.SelectedItem != null)
+                //{
+                //    artStudent.Student = (Student)listStudents.SelectedItem;
+                //    artStudent.MartialArt = martialArt;
+                //    ArtStudent.ArtStudents.Add(artStudent);
+                //}
                              
-                MartialArt.martialArts.Add(martialArt);
+                //MartialArt.martialArts.Add(martialArt);
 
                 MartialArtsWindow martialArtsWindow = new MartialArtsWindow();
           
@@ -66,22 +66,22 @@ namespace Martial_Arts_WPF.DialogWindows
             try
             {
 
-                MartialArt martialArt = new MartialArt();
-                ArtStudent artStudent = new ArtStudent();
-                martialArt.Name = textName.Text;
-                if ((Student)listStudents.SelectedItem != null)
-                {
-                    artStudent.Student = (Student)listStudents.SelectedItem;
-                    artStudent.MartialArt = martialArt;
-                    ArtStudent.ArtStudents.Add(artStudent);
-                }
-                MartialArt.martialArts.RemoveAt(Id_Art);
-                MartialArt.martialArts.Insert(Id_Art, martialArt);
+                //MartialArt martialArt = new MartialArt();
+                //ArtStudent artStudent = new ArtStudent();
+                //martialArt.Name = textName.Text;
+                //if ((Student)listStudents.SelectedItem != null)
+                //{
+                //    artStudent.Student = (Student)listStudents.SelectedItem;
+                //    artStudent.MartialArt = martialArt;
+                //    ArtStudent.ArtStudents.Add(artStudent);
+                //}
+                //MartialArt.martialArts.RemoveAt(Id_Art);
+                //MartialArt.martialArts.Insert(Id_Art, martialArt);
                
-                MartialArtsWindow martialArtsWindow = new MartialArtsWindow();
+                //MartialArtsWindow martialArtsWindow = new MartialArtsWindow();
                
-                martialArtsWindow.Show();
-                this.Close();
+                //martialArtsWindow.Show();
+                //this.Close();
             }
             catch (Exception)
             {

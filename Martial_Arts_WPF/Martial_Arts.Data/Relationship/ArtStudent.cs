@@ -21,25 +21,25 @@ namespace Martial_Arts.Data.Relationship
         public Guid _studentID;
         public Guid _artID;
 
-        [DataMember]
-        public Student Student
-        {
-            get
-            {
-                foreach (Student student in Student._students)
-                    if (student.Id == _studentID)
-                        return student;
-                return null;
+        //[DataMember]
+        //public Student Student
+        //{
+        //    get
+        //    {
+        //        foreach (Student student in Student._students)
+        //            if (student.Id == _studentID)
+        //                return student;
+        //        return null;
 
-            }
-            set
-            {
-                if (value != null)
-                {
-                    _studentID = value.Id;
-                }
-            }
-        }
+        //    }
+        //    set
+        //    {
+        //        if (value != null)
+        //        {
+        //            _studentID = value.Id;
+        //        }
+        //    }
+        //}
         [DataMember]
         public MartialArt MartialArt
         {

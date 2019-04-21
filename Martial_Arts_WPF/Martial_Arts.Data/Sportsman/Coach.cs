@@ -57,60 +57,43 @@ namespace Martial_Arts.Data.Sportsman
             get { return countStudents; }
         }
         public string JudgeCategory { get; set; }
+        //[DataMember]
+        //public List<Student> Students
+        //{
+        //    get
+        //    {
+        //        List<Student> result = new List<Student>();
+        //        foreach (Student st in Student._students)
+        //            if (st.Coach == this)
+        //                result.Add(st);
+        //        return result;
+        //    }
 
-        public Coach(int countStudents, string judgeCategory, int yearStartCareer,
-            string name, string surname, string belt, string sportTitle, int age, string country) :
-            base(name, surname, belt, sportTitle, age, country)
-        {
-            CountStudents = countStudents;
-            JudgeCategory = judgeCategory;
-            YearStartCareer = yearStartCareer;
+        //}  
+        //public List<MartialArt> MaterialArts
+        //{
+        //    get
+        //    {
+        //        List<MartialArt> result = new List<MartialArt>();
+        //        foreach (ArtCoach cia in ArtCoach.ArtCoaches)
+        //            if (cia.coach == this)
+        //                result.Add(cia.MaterialArt);
+        //        return result;
+        //    }
 
-        }
-        public Coach(string name, string surname, string belt, int age):
-            base(name, surname, belt,  age )
-        {
-
-        }
-        [DataMember]
-        public List<Student> Students
-        {
-            get
-            {
-                List<Student> result = new List<Student>();
-                foreach (Student st in Student._students)
-                    if (st.Coach == this)
-                        result.Add(st);
-                return result;
-            }
-
-        }
-
+        //}
         
-        public List<MartialArt> MaterialArts
-        {
-            get
-            {
-                List<MartialArt> result = new List<MartialArt>();
-                foreach (ArtCoach cia in ArtCoach.ArtCoaches)
-                    if (cia.coach == this)
-                        result.Add(cia.MaterialArt);
-                return result;
-            }
-
-        }
-        
-        public List<ArtCoach> ArtCoaches
-        {
-            get
-            {
-                List<ArtCoach> result = new List<ArtCoach>();
-                foreach (ArtCoach cia in ArtCoach.ArtCoaches)
-                    if (cia.coach == this)
-                        result.Add(cia);
-                return result;
-            }
-        }
+        //public List<ArtCoach> ArtCoaches
+        //{
+        //    get
+        //    {
+        //        List<ArtCoach> result = new List<ArtCoach>();
+        //        foreach (ArtCoach cia in ArtCoach.ArtCoaches)
+        //            if (cia.coach == this)
+        //                result.Add(cia);
+        //        return result;
+        //    }
+        //}
  
         public List<Club> Clubs
         {

@@ -19,7 +19,7 @@ namespace Martial_Arts_WPF.AdditionalWindows
             InitializeComponent();
 
             string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
-            string sql = "SELECT Name,Surname,Age,Belt FROM Coach";
+            string sql = "SELECT * FROM Coach";
             using (SqlConnection conn = new SqlConnection(connectionString))
             {               
                 conn.Open();
@@ -44,16 +44,11 @@ namespace Martial_Arts_WPF.AdditionalWindows
         {
             try
             {
+                Coach coach = new Coach();
                 DataRowView dataRow = listCoach.SelectedItem as DataRowView;
-                string name = dataRow.Row["Name"].ToString();
-                string surname = dataRow.Row["Surname"].ToString();
-                string age = dataRow.Row["Age"].ToString();
-                string belt = dataRow.Row["Belt"].ToString();
-
+                string id = dataRow.Row["Pk_Coach_Id"].ToString();
                 string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
-
-                string sql = "DELETE FROM Coach WHERE Name='" + name + "' AND Surname='"+surname+"' " +
-                    "AND Age='"+age+"' AND Belt='"+belt+"'";
+                string sql = "DELETE FROM Coach WHERE Pk_Coach_id='" + id + "'";
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     conn.Open();
@@ -63,7 +58,7 @@ namespace Martial_Arts_WPF.AdditionalWindows
                     listCoach.ItemsSource = null;
 
                     DataTable data = new DataTable("Coach");
-                    sql = "SELECT Name, Surname, Age, Belt FROM Coach";
+                    sql = "SELECT * FROM Coach";
                     command = new SqlCommand(sql, conn);
                  
                     sqlDataAdapter = new SqlDataAdapter(command);

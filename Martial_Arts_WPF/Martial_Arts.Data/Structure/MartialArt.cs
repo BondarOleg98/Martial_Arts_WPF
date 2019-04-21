@@ -39,43 +39,43 @@ namespace Martial_Arts.Data.Structure
             CountCountry = countCountry;
         }
 
-        public List<Coach> Coaches
-        {
-            get
-            {
-                List<Coach> result = new List<Coach>();
-                foreach (ArtCoach cia in ArtCoach.ArtCoaches)
-                    if (cia.MaterialArt == this)
-                        result.Add(cia.coach);
-                return result;
-            }
+        //public List<Coach> Coaches
+        //{
+        //    get
+        //    {
+        //        List<Coach> result = new List<Coach>();
+        //        foreach (ArtCoach cia in ArtCoach.ArtCoaches)
+        //            if (cia.MaterialArt == this)
+        //                result.Add(cia.coach);
+        //        return result;
+        //    }
 
-        }
+        //}
   
-        public List<Student> Students
-        {
-            get
-            {
-                List<Student> result = new List<Student>();
-                foreach (ArtStudent cia in ArtStudent.ArtStudents)
-                    if (cia.MartialArt == this)
-                        result.Add(cia.Student);
-                return result;
-            }
+        //public List<Student> Students
+        //{
+        //    get
+        //    {
+        //        List<Student> result = new List<Student>();
+        //        foreach (ArtStudent cia in ArtStudent.ArtStudents)
+        //            if (cia.MartialArt == this)
+        //                result.Add(cia.Student);
+        //        return result;
+        //    }
 
-        }
+        //}
 
-        public List<ArtCoach> ArtCoaches
-        {
-            get
-            {
-                List<ArtCoach> result = new List<ArtCoach>();
-                foreach (ArtCoach cia in ArtCoach.ArtCoaches)
-                    if (cia.MaterialArt == this)
-                        result.Add(cia);
-                return result;
-            }
-        }
+        //public List<ArtCoach> ArtCoaches
+        //{
+        //    get
+        //    {
+        //        List<ArtCoach> result = new List<ArtCoach>();
+        //        foreach (ArtCoach cia in ArtCoach.ArtCoaches)
+        //            if (cia.MaterialArt == this)
+        //                result.Add(cia);
+        //        return result;
+        //    }
+        //}
 
         public List<ArtStudent> ArtStudents
         {

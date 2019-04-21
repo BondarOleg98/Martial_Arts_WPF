@@ -72,23 +72,23 @@ namespace Martial_Arts_WPF.AdditionalWindows
 
         private void Button_Show_Click(object sender, RoutedEventArgs e)
         {
-            Student.Students.Clear();
-            listStudent.ItemsSource = Student.Students;
-            listStudent.Items.Refresh();
+            //Student.Students.Clear();
+            //listStudent.ItemsSource = Student.Students;
+            //listStudent.Items.Refresh();
 
-            MartialArt MartialArts = (MartialArt)listMartialArts.SelectedItem;
-            if (MartialArts != null)
-            {
-                foreach (Student item in MartialArts.Students)
-                {
-                    if (item != null)
-                    {
-                        Student.Students.Add(item);
-                        listStudent.ItemsSource = Student.Students;
-                        listStudent.Items.Refresh();
-                    }
-                }
-            }
+            //MartialArt MartialArts = (MartialArt)listMartialArts.SelectedItem;
+            //if (MartialArts != null)
+            //{
+            //    foreach (Student item in MartialArts.Students)
+            //    {
+            //        if (item != null)
+            //        {
+            //            Student.Students.Add(item);
+            //            listStudent.ItemsSource = Student.Students;
+            //            listStudent.Items.Refresh();
+            //        }
+            //    }
+            //}
             
             
            

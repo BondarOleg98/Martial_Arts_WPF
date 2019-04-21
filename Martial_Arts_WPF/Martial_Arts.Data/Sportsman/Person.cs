@@ -1,5 +1,7 @@
 ﻿using Martial_Arts.Data.Sportsman;
 using System;
+using System.Configuration;
+using System.Data.Linq;
 using System.Data.Linq.Mapping;
 using System.Runtime.Serialization;
 
@@ -9,36 +11,36 @@ namespace Martial_Arts.Data
     [KnownType(typeof(Student))]
     [KnownType(typeof(Coach))]
     [Table]
-    [InheritanceMapping(Code = "S", Type = typeof(Student),
-    IsDefault = true)]
-    public class Person : Base
+    [InheritanceMapping(Code = "S", Type = typeof(Student),IsDefault = true)]
+    public class Person :DataContext
     {
-        [Column(IsDiscriminator = true)]
+        [Column(IsDiscriminator = true, DbType = "varchar(50)")]
         public string DiscKey;
 
         [DataMember]
         private int age;
-       
-        public string Country { get; set; }
-        [DataMember]   
-        [Column]
-        public string Belt { get; set; }
 
-        public string SportTitle { get; set; }
+        [Column(IsPrimaryKey = true, IsDbGenerated = true, DbType = "Int NOT NULL IDENTITY")]
+        public int Pk_Person_Id { get; set; }
 
         [DataMember]
-        [Column]
+        [Column(DbType = "varchar(50)")]
+        public string Belt { get; set; }
+
+
+        [DataMember]
+        [Column(DbType = "varchar(50)")]
         public string Name { get; set; }
 
         [DataMember]
-        [Column]
+        [Column(DbType = "varchar(50)")]
         public string Surname { get; set; }
 
-        public Person()
+        public Person():base(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString)
         {
 
         }
-        [Column]
+        [Column(DbType = "Int")]
         public int Age
         {
             get { return age; }
@@ -49,23 +51,6 @@ namespace Martial_Arts.Data
                 else
                     age = value;
             }
-        }
-        public Person(string name, string surname, string belt, string sportTitle, int age, string country)
-        {
-            Name = name;
-            Surname = surname;
-            Belt = belt;
-            SportTitle = sportTitle;
-            Age = age;
-            Country = country;
-        }
-
-        public Person(string name, string surname, string belt, int age)
-        {
-            Name = name;
-            Surname = surname;
-            Belt = belt;
-            this.age = age;
         }
         
     }

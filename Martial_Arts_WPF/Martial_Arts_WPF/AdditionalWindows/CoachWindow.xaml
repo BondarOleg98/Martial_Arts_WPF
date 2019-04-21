@@ -27,7 +27,14 @@
             </ListView.View>
         </ListView>
         <Label Content="Coaches" Grid.Column="1" HorizontalAlignment="Left" Margin="102,10,0,0" VerticalAlignment="Top"/>
-        <DataGrid x:Name="listCoach" AutoGenerateColumns="True" Grid.Column="1" HorizontalAlignment="Left" Height="225" Margin="10,37,0,0" VerticalAlignment="Top" Width="239" IsReadOnly="True"/>
+        <DataGrid x:Name="listCoach" AutoGenerateColumns="False" Grid.Column="1" HorizontalAlignment="Left" Height="225" Margin="10,37,0,0" VerticalAlignment="Top" Width="232" IsReadOnly="True" GridLinesVisibility="None">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Name" Binding="{Binding Path=Name}" Width="50" />
+                <DataGridTextColumn Header="Surname" Binding="{Binding Path=Surname}" Width="80" />
+                <DataGridTextColumn Header="Age" Binding="{Binding Path=Age}" Width="50" />
+                <DataGridTextColumn Header="Belt" Binding="{Binding Path=Belt}" Width="50" />
+            </DataGrid.Columns>
+        </DataGrid>
 
 
     </Grid>

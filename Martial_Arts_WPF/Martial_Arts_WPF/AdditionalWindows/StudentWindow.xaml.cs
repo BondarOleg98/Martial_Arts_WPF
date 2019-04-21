@@ -11,6 +11,10 @@ using System.Data.SqlClient;
 using System.Configuration;
 using System.Data.Linq;
 using Martial_Arts.Data;
+using System.Linq;
+using System.Windows.Controls;
+using System.Data;
+using System;
 
 namespace Martial_Arts_WPF.AdditionalWindows
 {
@@ -24,16 +28,13 @@ namespace Martial_Arts_WPF.AdditionalWindows
             InitializeComponent();
             string connetionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
             DataContext db = new DataContext(connetionString);
-
             Table<Person> students = db.GetTable<Person>();
-            //listStudent.ItemsSource = students;
+            listStudent.ItemsSource = students;
         }
 
         private void Button_Add_Click(object sender, RoutedEventArgs e)
-        {
-           
-            StudentDialogWindow studentDialogWindow = new StudentDialogWindow();
-           
+        {         
+            StudentDialogWindow studentDialogWindow = new StudentDialogWindow();      
             studentDialogWindow.bt_Edit.IsEnabled = false;
             studentDialogWindow.Show();
             this.Close();
@@ -41,20 +42,17 @@ namespace Martial_Arts_WPF.AdditionalWindows
 
         private void Button_Remove_Click(object sender, RoutedEventArgs e)
         {
-            var student = (Student)listStudent.SelectedItem;
-            
-            string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
-            string sql = "DELETE FROM Students WHERE Name='"+student.Name+"' AND Surname='"+student.Surname+"' AND " +
-                "Age='"+student.Age+"' AND Belt='"+student.Belt+"'";
-            using (SqlConnection conn = new SqlConnection(connectionString))
-            {
-                conn.Open();
-                SqlCommand command = new SqlCommand(sql, conn);
-                command.ExecuteNonQuery();
-            }
-
-            //Student._students.Remove(student);
-            //listStudent.Items.Refresh();
+            string connetionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+            DataContext db = new DataContext(connetionString);
+            Student student = new Student();
+       
+            int id  = (listStudent.SelectedItem as Student).Pk_Person_Id;
+            student.Pk_Person_Id = id;
+            var st = db.GetTable<Person>().SingleOrDefault(p=>p.Pk_Person_Id==id);
+            db.GetTable<Person>().DeleteOnSubmit(st as Person);
+            db.SubmitChanges();
+            Table<Person> students = db.GetTable<Person>();
+            listStudent.ItemsSource = students;
 
             MartialArt._martialArts.Clear();
             listMartialArts.ItemsSource = MartialArt._martialArts;
@@ -63,18 +61,20 @@ namespace Martial_Arts_WPF.AdditionalWindows
 
         private void Button_Edit_Click(object sender, RoutedEventArgs e)
         {
-            int student_Id = listStudent.SelectedIndex;
-            var student = (Student)listStudent.SelectedItem;
-            if (student_Id == -1)
+            try
             {
-                MessageBox.Show("Choose a student");
-            }
-            else
-            {      
-                StudentDialogWindow studentDialogWindow = new StudentDialogWindow(student_Id, student, student.Coach);            
-                studentDialogWindow.bt_Add.IsEnabled = false;                
+                int id = (listStudent.SelectedItem as Student).Pk_Person_Id;
+                
+
+
+                StudentDialogWindow studentDialogWindow = new StudentDialogWindow(listStudent.SelectedItem as Student);
+                studentDialogWindow.bt_Add.IsEnabled = false;
                 studentDialogWindow.Show();
                 this.Close();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Choose a student");
             }
         }
 
