@@ -71,6 +71,9 @@ namespace Martial_Arts_WPF.DialogWindows
                     comboBoxCoaches.Items.Add(coach["Name"].ToString());
                 }
             }
+            DataContext db = new DataContext(connectionString);
+            Table<MartialArt> martialArts = db.GetTable<MartialArt>();
+            listMartialArts.ItemsSource = martialArts;
         }
 
         private void Button_Add_Click(object sender, RoutedEventArgs e)

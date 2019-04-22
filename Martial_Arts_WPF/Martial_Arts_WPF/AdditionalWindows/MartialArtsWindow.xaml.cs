@@ -2,11 +2,13 @@
 using Martial_Arts_WPF.DialogWindows;
 using Martial_Arts.Data.Structure;
 using Martial_Arts.Data.Sportsman;
-using System.Xml.Serialization;
 using System.Collections.Generic;
-using System.IO;
-using System.Runtime.Serialization.Json;
 using Martial_Arts.Data.Relationship;
+using System;
+using System.Configuration;
+using System.Data.Linq;
+using Martial_Arts.Data;
+using System.Linq;
 
 namespace Martial_Arts_WPF.AdditionalWindows
 {
@@ -18,8 +20,10 @@ namespace Martial_Arts_WPF.AdditionalWindows
         public MartialArtsWindow()
         {
             InitializeComponent();
-            listMartialArts.ItemsSource = MartialArt.martialArts;
-            listMartialArts.Items.Refresh();
+            string connetionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+            DataContext db = new DataContext(connetionString);
+            Table<MartialArt> martialArts = db.GetTable<MartialArt>();
+            listMartialArts.ItemsSource = martialArts;
         }
 
         private void Button_Add_Click(object sender, RoutedEventArgs e)
@@ -33,32 +37,44 @@ namespace Martial_Arts_WPF.AdditionalWindows
 
         private void Button_Remove_Click(object sender, RoutedEventArgs e)
         {
-            var martialArt = (MartialArt)listMartialArts.SelectedItem;
-          
-            MartialArt.martialArts.Remove(martialArt);
-            listMartialArts.Items.Refresh();
+            string connetionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+            DataContext db = new DataContext(connetionString);
+            MartialArt martialArt = new MartialArt();
 
-            Student.Students.Clear();
-            listStudent.ItemsSource = Student.Students;
+            int id = (listMartialArts.SelectedItem as MartialArt).Pk_Art_Id;
+            martialArt.Pk_Art_Id = id;
+            var ma = db.GetTable<MartialArt>().SingleOrDefault(p => p.Pk_Art_Id == id);
+            Table<ArtStudent> artStudents = db.GetTable<ArtStudent>();
+            
+            foreach (var item in artStudents)
+            {
+                if (item.Id_Art == id)
+                {
+                    db.GetTable<ArtStudent>().DeleteOnSubmit(item);
+                    db.SubmitChanges();
+                }
+            }
+
+            db.GetTable<MartialArt>().DeleteOnSubmit(ma as MartialArt);
+            db.SubmitChanges();
+            Table<MartialArt> martialArts = db.GetTable<MartialArt>();
+            listMartialArts.ItemsSource = martialArts;
+            listStudent.ItemsSource = null;
             listStudent.Items.Refresh();
         }
 
         private void Button_Edit_Click(object sender, RoutedEventArgs e)
         {
-            int art_Id = listMartialArts.SelectedIndex;
-            var martial_arts = (MartialArt)listMartialArts.SelectedItem;
-            if (art_Id == -1)
+            try
             {
-                MessageBox.Show("Choose an art");
-            }
-            else
-            {
-
-                MartialArtsDialogWindow martialArtsDialogWindow = new MartialArtsDialogWindow(art_Id, martial_arts);
+                MartialArtsDialogWindow martialArtsDialogWindow = new MartialArtsDialogWindow(listMartialArts.SelectedItem as MartialArt);
                 martialArtsDialogWindow.bt_Add.IsEnabled = false;
                 martialArtsDialogWindow.Show();
                 this.Close();
-
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Choose an art");
             }
         }
 
@@ -72,26 +88,40 @@ namespace Martial_Arts_WPF.AdditionalWindows
 
         private void Button_Show_Click(object sender, RoutedEventArgs e)
         {
-            //Student.Students.Clear();
-            //listStudent.ItemsSource = Student.Students;
-            //listStudent.Items.Refresh();
+            try
+            {
+                int id = (listMartialArts.SelectedItem as MartialArt).Pk_Art_Id;
+                string connetionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+                DataContext db = new DataContext(connetionString);
+                Table<ArtStudent> artStudents = db.GetTable<ArtStudent>();
+                Table<Person> _students = db.GetTable<Person>();
+                List<int> st = new List<int>();
+                List<Person> students = new List<Person>();
+                foreach (var item in artStudents)
+                {
+                    if (item.Id_Art == id)
+                    {
+                        st.Add(item.Id_Student);
+                    }
+                }
+                foreach (var item in _students)
+                {
+                    foreach (var _item in st)
+                    {
+                        if (item.Pk_Person_Id == _item)
+                        {
+                            students.Add(item);
+                        }
+                    }
+                }
 
-            //MartialArt MartialArts = (MartialArt)listMartialArts.SelectedItem;
-            //if (MartialArts != null)
-            //{
-            //    foreach (Student item in MartialArts.Students)
-            //    {
-            //        if (item != null)
-            //        {
-            //            Student.Students.Add(item);
-            //            listStudent.ItemsSource = Student.Students;
-            //            listStudent.Items.Refresh();
-            //        }
-            //    }
-            //}
-            
-            
-           
-        }
+                listStudent.ItemsSource = students;
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Choose a student");
+            }
+
+}
     }
 }
