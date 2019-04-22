@@ -17,6 +17,9 @@ namespace Martial_Arts.Data
         [Column(IsDiscriminator = true, DbType = "varchar(50)")]
         public string DiscKey;
 
+        [Column(DbType = "int")]
+        public int Fk_Coach_id { get; set; }
+
         [DataMember]
         private int age;
 

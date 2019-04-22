@@ -4,40 +4,46 @@ using Martial_Arts.Data.Sportsman;
 using Martial_Arts.Data.Relationship;
 using System.Xml.Serialization;
 using System.Runtime.Serialization;
+using System.Data.Linq.Mapping;
 
 namespace Martial_Arts.Data.Structure
 {
     [DataContract]
-    public class MartialArt : Base
+    [Table(Name ="Art")]
+    public class MartialArt
     {
         public static List<MartialArt> martialArts = new List<MartialArt>();
         public static List<MartialArt> _martialArts = new List<MartialArt>();
         public Guid _fedId;
 
-        private int countCountry;
+        [Column(IsPrimaryKey = true, IsDbGenerated = true, DbType = "Int NOT NULL IDENTITY")]
+        public int Pk_Art_Id { get; set; }
+
+        //private int countCountry;
         public MartialArt()
         {
 
         }
-        public int CountCountry
-        {
-            set
-            {
-                if (value < 0)
-                {
-                    countCountry = 0;
-                }
-                else { countCountry = value; }
-            }
-        }
+        //public int CountCountry
+        //{
+        //    set
+        //    {
+        //        if (value < 0)
+        //        {
+        //            countCountry = 0;
+        //        }
+        //        else { countCountry = value; }
+        //    }
+        //}
         [DataMember]
+        [Column(DbType = "varchar(50)")]
         public string Name { get; set; }
 
-        public MartialArt(string name, int countCountry)
-        {
-            Name = name;
-            CountCountry = countCountry;
-        }
+        //public MartialArt(string name, int countCountry)
+        //{
+        //    Name = name;
+        //    CountCountry = countCountry;
+        //}
 
         //public List<Coach> Coaches
         //{
@@ -77,17 +83,17 @@ namespace Martial_Arts.Data.Structure
         //    }
         //}
 
-        public List<ArtStudent> ArtStudents
-        {
-            get
-            {
-                List<ArtStudent> result = new List<ArtStudent>();
-                foreach (ArtStudent sia in ArtStudent.ArtStudents)
-                    if (sia.MartialArt == this)
-                        result.Add(sia);
-                return result;
-            }
-        }
+        //public List<ArtStudent> ArtStudents
+        //{
+        //    get
+        //    {
+        //        List<ArtStudent> result = new List<ArtStudent>();
+        //        foreach (ArtStudent sia in ArtStudent.ArtStudents)
+        //            if (sia.MartialArt == this)
+        //                result.Add(sia);
+        //        return result;
+        //    }
+        //}
 
         public List<Federation> Federations
         {

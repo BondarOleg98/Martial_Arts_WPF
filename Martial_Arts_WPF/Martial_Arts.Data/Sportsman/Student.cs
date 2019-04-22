@@ -16,7 +16,6 @@ namespace Martial_Arts.Data.Sportsman
         //public Guid _coachId;
         public static List<Student> _students = new List<Student>();
         public static List<Student> Students = new List<Student>();
-
        
         public Student()
         {

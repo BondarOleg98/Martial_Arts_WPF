@@ -16,15 +16,16 @@ namespace Martial_Arts_WPF.DialogWindows
     /// </summary>
     public partial class CoachDialogWindow : Window
     {
-        private int Id_Coach { get; set; }
+        private string Id_Coach { get; set; }
 
-        public CoachDialogWindow(DataRowView dataRow)
+        public CoachDialogWindow(DataRowView dataRow, string id)
         {
             InitializeComponent();
             string name = dataRow.Row["Name"].ToString();
             string surname = dataRow.Row["Surname"].ToString();
             string age = dataRow.Row["Age"].ToString();
             string belt = dataRow.Row["Belt"].ToString();
+            Id_Coach = id;
             textName.Text = name;
             textSurname.Text = surname;
             textAge.Text = age;
@@ -42,7 +43,7 @@ namespace Martial_Arts_WPF.DialogWindows
                 Convert.ToInt32(textAge.Text).GetType();
                
                 string connetionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
-
+              
                 string sql = "Insert into Coach (Name,Surname,Age,Belt) " +
                    "values('" + textName.Text + "','" +
                     textSurname.Text + "','" + textAge.Text + "','" + textBelt.Text + "')";
@@ -56,8 +57,7 @@ namespace Martial_Arts_WPF.DialogWindows
                 }
 
                 CoachWindow coachWindow = new CoachWindow();
-                this.Close();
-                
+                this.Close();        
                 coachWindow.Show();
             }
             catch (Exception)
@@ -74,9 +74,10 @@ namespace Martial_Arts_WPF.DialogWindows
                 Convert.ToInt32(textAge.Text).GetType();
    
                 string connetionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
-
+               
                 string sql = "Update Coach Set " +
-               "Name='" + textName.Text + "', Surname='" + textSurname.Text + "', Age='" + textAge.Text + "', Belt='" + textBelt.Text + "'";
+               "Name='" + textName.Text + "', Surname='" + textSurname.Text + "', Age='" + textAge.Text + "', Belt='" + textBelt.Text + "'" +
+               "WHERE Pk_Coach_id='"+Id_Coach+"'";
 
 
                 SqlDataAdapter adapter = new SqlDataAdapter();
@@ -84,6 +85,7 @@ namespace Martial_Arts_WPF.DialogWindows
                 {
                     con.Open();
                     SqlCommand command = new SqlCommand(sql, con);
+                    command.ExecuteNonQuery();
                     adapter.UpdateCommand = new SqlCommand(sql, con);
                     adapter.UpdateCommand.ExecuteNonQuery();
                 }

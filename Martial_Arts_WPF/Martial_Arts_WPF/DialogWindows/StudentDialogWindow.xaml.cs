@@ -12,6 +12,7 @@ using System.Configuration;
 using System.Data.Linq;
 using Martial_Arts.Data;
 using System.Linq;
+using System.Data;
 
 namespace Martial_Arts_WPF.DialogWindows
 {
@@ -26,7 +27,26 @@ namespace Martial_Arts_WPF.DialogWindows
         public StudentDialogWindow()
         {
             InitializeComponent();
-;
+            string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+            string sql = "SELECT * FROM Coach";
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+                SqlCommand command = new SqlCommand(sql, conn);
+                command.ExecuteNonQuery();
+                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(command);
+                DataTable data = new DataTable("Coach");
+                sqlDataAdapter.Fill(data);
+
+                foreach (DataRow coach in data.Rows)
+                {
+                    comboBoxCoaches.Items.Add(coach["Name"].ToString());
+                }
+            }
+            DataContext db = new DataContext(connectionString);
+            Table<MartialArt> martialArts = db.GetTable<MartialArt>();
+            listMartialArts.ItemsSource = martialArts;
+           
         }
         public StudentDialogWindow(Student student)
         {        
@@ -36,172 +56,103 @@ namespace Martial_Arts_WPF.DialogWindows
             textAge.Text = student.Age.ToString();
             textBelt.Text = student.Belt;
             Id_Student = student.Pk_Person_Id;
-            //string name = (listStudent.SelectedItem as Student).Name;
-            //string surname = (listStudent.SelectedItem as Student).Surname;
-            //string belt = (listStudent.SelectedItem as Student).Belt;
-            //int age = (listStudent.SelectedItem as Student).Age;
-
-            //comboBoxCoaches.ItemsSource = Coach.coaches;
-            //listMartialArts.ItemsSource = MartialArt.martialArts;
+            string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+            string sql = "SELECT * FROM Coach";
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+                SqlCommand command = new SqlCommand(sql, conn);
+                command.ExecuteNonQuery();
+                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(command);
+                DataTable data = new DataTable("Coach");
+                sqlDataAdapter.Fill(data);
+                foreach (DataRow coach in data.Rows)
+                {
+                    comboBoxCoaches.Items.Add(coach["Name"].ToString());
+                }
+            }
         }
 
         private void Button_Add_Click(object sender, RoutedEventArgs e)
         {
-            string connetionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
-            DataContext db = new DataContext(connetionString);
-            Student student = new Student
+            try
             {
-                Name = textName.Text,
-                Surname = textSurname.Text,
-                Age = Convert.ToInt32(textAge.Text),
-                Belt = textBelt.Text
-            };
-            db.GetTable<Person>().InsertOnSubmit(student);
-            db.SubmitChanges();
-            //try
-            //{
+                int id = 0;
+                string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+                DataContext db = new DataContext(connectionString);
 
-            //    Student student = new Student();
-            //    ArtStudent artStudent = new ArtStudent();
-            //    student.Name = textName.Text;
-            //    student.Surname = textSurname.Text;
-            //    student.Belt = textBelt.Text;
+                int id_a = (listMartialArts.SelectedItem as MartialArt).Pk_Art_Id;
+                string coach = comboBoxCoaches.SelectedValue.ToString();
+                string sql = "SELECT Pk_Coach_id FROM Coach WHERE Name='" + coach + "'";
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+                    SqlCommand command = new SqlCommand(sql, conn);
 
-            //    student.Age = Convert.ToInt32(textAge.Text);
+                    SqlDataReader reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        id = reader.GetInt32(0);
+                    }
+                }
+                Student student = new Student
+                {
+                    Name = textName.Text,
+                    Surname = textSurname.Text,
+                    Age = Convert.ToInt32(textAge.Text),
+                    Belt = textBelt.Text,
+                    Fk_Coach_id = id
+                };
+                db.GetTable<Person>().InsertOnSubmit(student);
+                db.SubmitChanges();
 
-            //    var coach_surname = comboBoxCoaches.SelectedItem;
-            //    if ((MartialArt)listMartialArts.SelectedItem != null)
-            //    {
-            //        artStudent.MartialArt = (MartialArt)listMartialArts.SelectedItem;
-            //        artStudent.Student = student;
-            //        ArtStudent.ArtStudents.Add(artStudent);
-            //    }
-            //    if (comboBoxCoaches.SelectedItem == null)
-            //    {
-            //        MessageBox.Show("Choose a coach");
-            //    }
+                var ast = db.GetTable<Person>().OrderByDescending(a => a.Pk_Person_Id).FirstOrDefault();
 
-            //    Student._students.Add(student);
-            //    string sql = "";
-            //    string connetionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
-
-            //    SqlDataAdapter adapter = new SqlDataAdapter();
-            //    int id = 0;
-            //    using (SqlConnection con = new SqlConnection(connetionString))
-            //    {
-            //        con.Open();
-            //        SqlCommand command = new SqlCommand(sql, con);
-
-
-            //        sql = "SELECT Pk_Coach_Id FROM Coach WHERE  Surname='" + coach_surname + "' ";
-
-            //        command = new SqlCommand(sql, con);
-            //        SqlDataReader reader = command.ExecuteReader();
-            //        while (reader.Read())
-            //        {
-            //            id = reader.GetInt32(0);
-            //        }
-            //        reader.Close();
-            //        sql = "Insert into Students (Name,Surname,Age,Belt,Fk_Coach_Id) " +
-            //        "values('" + textName.Text + "','" +
-            //        textSurname.Text + "','" + textAge.Text + "','" + textBelt.Text + "','" + id + "')";
-
-            //        adapter.InsertCommand = new SqlCommand(sql, con);
-            //        adapter.InsertCommand.ExecuteNonQuery();
-            //        command.Dispose();
-
-            //    }
-
-
+                ArtStudent artStudent = new ArtStudent
+                {
+                    Id_Student = ast.Pk_Person_Id,
+                    Id_Art = id_a
+                };
+                db.GetTable<ArtStudent>().InsertOnSubmit(artStudent);
+                db.SubmitChanges();
                 StudentWindow studentWindow = new StudentWindow();
                 this.Close();
                 studentWindow.Show();
-            //}
-            //catch (Exception)
-            //{
-            //    MessageBox.Show("Choose all categories");
-            //}
-        }
+           
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Choose all categories");
+            }
+}
 
         private void Button_Edit_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                string connetionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
-                DataContext db = new DataContext(connetionString);
+                string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+                DataContext db = new DataContext(connectionString);
+                int id = 0;
+                string coach = comboBoxCoaches.SelectedValue.ToString();
+                string sql = "SELECT Pk_Coach_id FROM Coach WHERE Name='" + coach + "'";
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+                    SqlCommand command = new SqlCommand(sql, conn);
 
+                    SqlDataReader reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        id = reader.GetInt32(0);
+                    }
+                }
                 var st = db.GetTable<Person>().SingleOrDefault(p => p.Pk_Person_Id == Id_Student);
                 st.Name = textName.Text;
                 st.Surname = textSurname.Text;
                 st.Age = Convert.ToInt32(textAge.Text);
                 st.Belt = textBelt.Text;
+                st.Fk_Coach_id = id;
                 db.SubmitChanges();
-                //try
-                //Student student = new Student();
-                //var coach_surname = comboBoxCoaches.SelectedItem;
-                //string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
-
-                //int id = 0;
-                //int id_coach = 0;
-                //string sql = "";
-                //SqlDataAdapter adapter = new SqlDataAdapter();
-                //using (SqlConnection conn = new SqlConnection(connectionString))
-                //{
-                //    conn.Open();
-
-                //    SqlCommand command = new SqlCommand(sql_edit, conn);
-                //    SqlDataReader reader = command.ExecuteReader();
-                //    while (reader.Read())
-                //    {
-                //        id = reader.GetInt32(0);
-                //    }
-                //    reader.Close();
-
-                //    sql = "SELECT Pk_Coach_Id FROM Coach WHERE  Surname='" + coach_surname + "' ";
-                //    command = new SqlCommand(sql, conn);
-                //    reader = command.ExecuteReader();
-                //    while (reader.Read())
-                //    {
-                //        id_coach = reader.GetInt32(0);
-                //    }
-                //    reader.Close();
-
-                //    sql =String.Format("UPDATE Students SET Age = '" + textAge.Text + "', Name = '" + textName.Text + "'," +
-                //        "Surname='" + textSurname.Text + "', Belt='" + textBelt.Text + "', Fk_Coach_Id='"+id_coach+"'" +
-                //        " WHERE Pk_Student_Id={0}", id);
-                //    command = new SqlCommand(sql, conn);
-                //    adapter.UpdateCommand = new SqlCommand(sql, conn);
-                //    adapter.UpdateCommand.ExecuteNonQuery();
-
-                //    command.Dispose();
-
-                //}
-                //ArtStudent artStudent = new ArtStudent();
-                //student.Name = textName.Text;
-                //student.Surname = textSurname.Text;
-                //student.Belt = textBelt.Text;
-
-                //student.Age = Convert.ToInt32(textAge.Text);
-                ////student.Coach = (Coach)comboBoxCoaches.SelectedItem;
-                //if ((MartialArt)listMartialArts.SelectedItem == null)
-                //{
-                //    throw new Exception();
-                //}
-                //else
-                //{
-                //    artStudent.MartialArt = (MartialArt)listMartialArts.SelectedItem;
-                //    artStudent.Student = student;
-                //    ArtStudent.ArtStudents.Add(artStudent);
-                //}
-
-                //if (comboBoxCoaches.SelectedItem == null)
-                //{
-                //    throw new Exception();
-                //}
-
-                //Student._students.RemoveAt(Id_Student);
-                //Student._students.Insert(Id_Student, student);
-
 
                 StudentWindow studentWindow = new StudentWindow();            
                 studentWindow.Show();
@@ -212,7 +163,7 @@ namespace Martial_Arts_WPF.DialogWindows
 
                 MessageBox.Show("Choose right categories");
             }
-}
+        }
 
         private void Button_Cancel_Click(object sender, RoutedEventArgs e)
         {
